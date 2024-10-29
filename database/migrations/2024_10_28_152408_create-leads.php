@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('body');
             $table->integer('customer_id');
             $table->integer('service_id');
-            $table->enum('status', ['pending','in-progress','closed'])->default('pending')->comment('pending, in-progress, closed');
+            $table->enum('status', ['New','In-Progress','Closed'])->default('New')->comment('pending, in-progress, closed');
 
             $table->timestamps();
         });

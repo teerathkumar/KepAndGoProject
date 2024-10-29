@@ -20,7 +20,7 @@ export default function AuthenticatedLayout({ header, children }) {
             <Sidebar />
 
             <main className="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
-                <Navigation />
+                <Navigation page={route().current()}/>
                 <div className="container-fluid py-4">{children}</div>
             </main>
         </div>

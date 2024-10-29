@@ -1,5 +1,6 @@
 // import { FaBell } from "react-icons/fa";
 import {FaFax, FaSearch} from "react-icons/fa";
+import NavLink from "@/Components/NavLink.jsx";
 export default function Navigation(props) {
     return (
         <nav className="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
@@ -7,19 +8,19 @@ export default function Navigation(props) {
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                         <li className="breadcrumb-item text-sm"><a className="opacity-5 text-dark">Pages</a></li>
-                        <li className="breadcrumb-item text-sm text-dark active text-capitalize" aria-current="page">bc</li>
+                        <li className="breadcrumb-item text-sm text-dark active text-capitalize" aria-current="page">{props.page}</li>
                     </ol>
-                    <h6 className="font-weight-bolder mb-0 text-capitalize">h6</h6>
+                    <h6 className="font-weight-bolder mb-0 text-capitalize">{props.page}</h6>
 
                 </nav>
                 <div className="mt-sm-0 mt-2 me-md-0 me-sm-4 d-flex justify-content-end" id="navbar">
 
                     <ul className="navbar-nav  justify-content-end">
                         <li className="nav-item d-flex align-items-center">
-                            <a href="{{ url('/logout')}}" className="nav-link text-body font-weight-bold px-0">
+                            <NavLink className={"text-body font-weight-bold px-0"} href={route('logout')}>
                                 <i className="fa fa-user me-sm-1"></i>
                                 <span className="d-sm-inline d-none">Sign Out</span>
-                            </a>
+                            </NavLink>
                         </li>
                         <li className="nav-item d-xl-none ps-3 d-flex align-items-center">
                             <a className="nav-link text-body p-0" id="iconNavbarSidenav">

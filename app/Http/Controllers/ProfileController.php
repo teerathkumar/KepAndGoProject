@@ -23,6 +23,9 @@ class ProfileController extends Controller
             'status' => session('status'),
         ]);
     }
+    public function index(){
+        return Inertia::render('Profile/Profile', ['profileinfo' => Auth::user()]);
+    }
 
     /**
      * Update the user's profile information.
