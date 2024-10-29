@@ -15,9 +15,9 @@ export default function Dashboard(props) {
 
     const { data, setData, put, errors } = useForm({
 
-        nama: post.name || "",
+        nama: office.name || "",
 
-        parent_id: post.parent_id || "",
+        parent_id: office.parent_id || "",
 
     });
 

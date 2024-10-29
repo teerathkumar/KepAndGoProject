@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Lead;
@@ -44,7 +45,111 @@ class LeadsController extends Controller
 
         $leads = Lead::all();
 
-        return Inertia::render('Leads/Index', ['Leads' => $leads]);
+        return Inertia::render('Leads/Index', ['leads' => $leads]);
 
+    }
+
+
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+
+    public function create()
+
+    {
+
+        return Inertia::render('Leads/Create');
+
+    }
+
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+
+    public function store(Request $request)
+
+    {
+
+        Validator::make($request->all(), [
+
+            'title' => ['required'],
+
+            'body' => ['required'],
+            'customer_id' => ['required'],
+            'service_id' => ['required'],
+
+        ])->validate();
+
+
+        Lead::create($request->all());
+
+
+        return redirect()->route('leads.index');
+
+    }
+
+
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+
+    public function edit(Lead $lead)
+
+    {
+
+        return Inertia::render('Leads/Edit', [
+
+            'lead' => $lead
+
+        ]);
+
+    }
+
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+
+    public function update($id, Request $request)
+
+    {
+
+        Validator::make($request->all(), [
+
+            'title' => ['required'],
+
+            'body' => ['required'],
+            'customer_id' => ['required'],
+            'service_id' => ['required'],
+
+        ])->validate();
+
+
+        Lead::find($id)->update($request->all());
+
+        return redirect()->route('leads.index');
+
+    }
+
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+
+    public function destroy($id)
+    {
+        Lead::find($id)->delete();
+        return redirect()->route('leads.index');
     }
 }

@@ -2,15 +2,46 @@
 import {FaFax, FaSearch} from "react-icons/fa";
 import NavLink from "@/Components/NavLink.jsx";
 export default function Navigation(props) {
+    const replaceStr = (str)=>{
+        if(str){
+            const strcount = str.split('.').length;
+            var i=0;
+            const result = str.split('.').map(t => {
+                i++;
+                console.log("i: "+i+" - count: "+strcount);
+                // if(i<strcount){
+                return <li className="breadcrumb-item text-sm text-capitalize" aria-current="page">{t}</li>;
+                // } else {
+                //     return t+ " ";
+                // }
+
+            });
+            return result;
+        } else {
+            return <li className="breadcrumb-item text-sm text-capitalize" aria-current="page">Dashboard</li>;
+        }
+
+    }
+    const getStr = (str)=>{
+        var result;
+        if(str){
+            result = str.split('.');
+            return result[0];
+        } else {
+            return "Dashboard";
+        }
+
+
+    }
     return (
         <nav className="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
             <div className="container-fluid py-1 px-3">
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                         <li className="breadcrumb-item text-sm"><a className="opacity-5 text-dark">Pages</a></li>
-                        <li className="breadcrumb-item text-sm text-dark active text-capitalize" aria-current="page">{props.page}</li>
+                        {replaceStr(props.page)}
                     </ol>
-                    <h6 className="font-weight-bolder mb-0 text-capitalize">{props.page}</h6>
+                    <h6 className="font-weight-bolder mb-0 text-capitalize">{ getStr(props.page)}</h6>
 
                 </nav>
                 <div className="mt-sm-0 mt-2 me-md-0 me-sm-4 d-flex justify-content-end" id="navbar">
