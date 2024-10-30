@@ -14,7 +14,8 @@ export default defineConfig({
                 'resources/assets/js/plugins/perfect-scrollbar.min.js',
                 'resources/assets/js/plugins/smooth-scrollbar.min.js',
                 'resources/assets/js/plugins/fullcalendar.min.js',
-                'resources/assets/js/plugins/chartjs.min.js'
+                'resources/assets/js/plugins/chartjs.min.js',
+                'resources/assets/js/soft-ui-dashboard.min.js'
             ],
             refresh: true,
         }),
