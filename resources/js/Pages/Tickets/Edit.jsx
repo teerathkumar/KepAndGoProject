@@ -2,19 +2,19 @@ import React from 'react';
 
 import Authenticated from '@/Layouts/AuthenticatedLayout.jsx';
 
-import {Head, useForm, Link} from '@inertiajs/react';
-
-
+import {Head, useForm, usePage, Link} from '@inertiajs/react';
 export default function Dashboard(props) {
 
 
-    const {data, setData, errors, post} = useForm({
+    const {ticket} = usePage().props;
 
-        name: "",
+    const {data, setData, put, errors} = useForm({
 
-        phone: "",
-        email: "",
-        address: ""
+        title: ticket.title || "",
+        lead_id: ticket.lead_id || "",
+        user_id: ticket.user_id || "",
+        status: ticket.status || ""
+
 
     });
 
@@ -23,7 +23,7 @@ export default function Dashboard(props) {
 
         e.preventDefault();
 
-        post(route("customers.store"));
+        put(route("tickets.update", customer.id));
 
     }
 
@@ -36,7 +36,7 @@ export default function Dashboard(props) {
 
             errors={props.errors}
 
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Create Customer</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Update Ticket</h2>}
 
         >
 
@@ -48,13 +48,13 @@ export default function Dashboard(props) {
                     <div className="card-header pb-0">
                         <div className="d-flex flex-row justify-content-between">
                             <div>
-                                <h5 className="mb-0">Add Customer</h5>
+                                <h5 className="mb-0">Update Ticket</h5>
                             </div>
                             <Link
 
                                 className="btn bg-gradient-primary btn-sm mb-0" type="button"
 
-                                href={route("customers.index")}
+                                href={route("tickets.index")}
 
                             >
 
@@ -71,7 +71,7 @@ export default function Dashboard(props) {
 
                                 <div className="mb-2">
 
-                                    <label className="">Name</label>
+                                    <label className="">Title</label>
 
                                     <input
 
@@ -79,15 +79,15 @@ export default function Dashboard(props) {
 
                                         className="w-full rounded"
 
-                                        label="Name"
+                                        label="Title"
 
-                                        name="name"
+                                        name="title"
 
-                                        value={data.name}
+                                        value={data.title}
 
                                         onChange={(e) =>
 
-                                            setData("name", e.target.value)
+                                            setData("title", e.target.value)
 
                                         }
 
@@ -95,7 +95,7 @@ export default function Dashboard(props) {
 
                                     <span className="text-red-600">
 
-                                            {errors.name}
+                                            {errors.title}
 
                                         </span>
 
@@ -103,7 +103,7 @@ export default function Dashboard(props) {
 
                                 <div className="mb-2">
 
-                                    <label className="">Phone</label>
+                                    <label className="">Lead</label>
 
                                     <input
 
@@ -111,17 +111,17 @@ export default function Dashboard(props) {
 
                                         className="w-full rounded"
 
-                                        label="phone"
+                                        label="Lead"
 
-                                        name="phone"
+                                        name="lead"
 
-                                        errors={errors.phone}
+                                        errors={errors.lead_id}
 
-                                        value={data.phone}
+                                        value={data.lead_id}
 
                                         onChange={(e) =>
 
-                                            setData("phone", e.target.value)
+                                            setData("lead_id", e.target.value)
 
                                         }
 
@@ -129,14 +129,48 @@ export default function Dashboard(props) {
 
                                     <span className="text-red-600">
 
-                                            {errors.phone}
+                                            {errors.lead_id}
+
+                                        </span>
+
+                                </div>
+
+                                <div className="mb-2">
+
+                                    <label className="">User</label>
+
+                                    <input
+
+                                        type="text"
+
+                                        className="w-full rounded"
+
+                                        label="User"
+
+                                        name="user_id"
+
+                                        errors={errors.user_id}
+
+                                        value={data.user_id}
+
+                                        onChange={(e) =>
+
+                                            setData("user_id", e.target.value)
+
+                                        }
+
+                                    />
+
+                                    <span className="text-red-600">
+
+                                            {errors.user_id}
 
                                         </span>
 
                                 </div>
                                 <div className="mb-2">
 
-                                    <label className="">Email</label>
+                                    <label className="">User</label>
 
                                     <input
 
@@ -144,17 +178,17 @@ export default function Dashboard(props) {
 
                                         className="w-full rounded"
 
-                                        label="email"
+                                        label="User"
 
-                                        name="email"
+                                        name="user_id"
 
-                                        errors={errors.email}
+                                        errors={errors.user_id}
 
-                                        value={data.email}
+                                        value={data.user_id}
 
                                         onChange={(e) =>
 
-                                            setData("email", e.target.value)
+                                            setData("user_id", e.target.value)
 
                                         }
 
@@ -162,14 +196,14 @@ export default function Dashboard(props) {
 
                                     <span className="text-red-600">
 
-                                            {errors.email}
+                                            {errors.user_id}
 
                                         </span>
 
                                 </div>
                                 <div className="mb-2">
 
-                                    <label className="">Address</label>
+                                    <label className="">Status</label>
 
                                     <input
 
@@ -177,17 +211,17 @@ export default function Dashboard(props) {
 
                                         className="w-full rounded"
 
-                                        label="address"
+                                        label="Status"
 
-                                        name="address"
+                                        name="status"
 
-                                        errors={errors.address}
+                                        errors={errors.status}
 
-                                        value={data.address}
+                                        value={data.status}
 
                                         onChange={(e) =>
 
-                                            setData("address", e.target.value)
+                                            setData("status", e.target.value)
 
                                         }
 
@@ -195,14 +229,14 @@ export default function Dashboard(props) {
 
                                     <span className="text-red-600">
 
-                                            {errors.address}
+                                            {errors.status}
 
                                         </span>
 
                                 </div>
+
 
                             </div>
-
                             <div className="mt-4">
 
                                 <button
@@ -213,11 +247,12 @@ export default function Dashboard(props) {
 
                                 >
 
-                                    Save
+                                    Update
 
                                 </button>
 
                             </div>
+
 
                         </form>
 
@@ -230,6 +265,7 @@ export default function Dashboard(props) {
 
         </Authenticated>
 
-    );
+    )
+        ;
 
 }

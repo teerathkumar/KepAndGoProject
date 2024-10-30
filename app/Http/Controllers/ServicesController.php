@@ -2,27 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
 use Illuminate\Http\Request;
-use App\Models\Office;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Validator;
 
-class OfficesController extends Controller
+class ServicesController extends Controller
 {
     //
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-
     public function index()
 
     {
 
-        $offices = Office::with("parent")->get();
+        $services = Service::all();
 
-        return Inertia::render('Offices/Index', ['offices' => $offices]);
+        return Inertia::render('Services/Index', ['services' => $services]);
 
     }
 
@@ -36,8 +30,7 @@ class OfficesController extends Controller
     public function create()
 
     {
-        $offices = Office::all();
-        return Inertia::render('Offices/Create', ['offices' => $offices]);
+        return Inertia::render('Services/Create');
 
     }
 
@@ -54,17 +47,14 @@ class OfficesController extends Controller
 
         Validator::make($request->all(), [
 
-            'name' => ['required'],
-
-            'parent_id' => ['required'],
-
+            'name' => ['required']
         ])->validate();
 
 
-        Office::create($request->all());
+        Service::create($request->all());
 
 
-        return redirect()->route('offices.index');
+        return redirect()->route('services.index');
 
     }
 
@@ -75,14 +65,13 @@ class OfficesController extends Controller
      * @return response()
      */
 
-    public function edit(Office $office)
+    public function edit(Service $service)
 
     {
-        $offices = Office::all();
-        return Inertia::render('Offices/Edit', [
 
-            'office' => $office,
-            'offices' => $offices
+        return Inertia::render('Services/Edit', [
+
+            'service' => $service
 
         ]);
 
@@ -101,16 +90,14 @@ class OfficesController extends Controller
 
         Validator::make($request->all(), [
 
-            'name' => ['required'],
-
-            'parent_id' => ['required'],
+            'name' => ['required']
 
         ])->validate();
 
 
-        Office::find($id)->update($request->all());
+        Service::find($id)->update($request->all());
 
-        return redirect()->route('offices.index');
+        return redirect()->route('services.index');
 
     }
 
@@ -123,7 +110,7 @@ class OfficesController extends Controller
 
     public function destroy($id)
     {
-        Office::find($id)->delete();
-        return redirect()->route('offices.index');
+        Service::find($id)->delete();
+        return redirect()->route('services.index');
     }
 }

@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\View;
+use Inertia\Inertia;
 
 class InfoUserController extends Controller
 {
 
     public function index(){
         $users = User::all();
-        return Inertia::render('Users.Index',['users'=>$users]);
+        return Inertia::render('Users/Index', ['users'=>$users]);
     }
     public function create()
     {

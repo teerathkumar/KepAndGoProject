@@ -7,14 +7,22 @@ use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\LeadsController;
 use App\Http\Controllers\OfficesController;
 use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\TicketsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
 Route::resource('posts', PostController::class)->middleware(['auth', 'verified']);
 Route::resource('leads', LeadsController::class)->middleware(['auth', 'verified']);
 Route::resource('profiles', ProfileController::class)->middleware(['auth', 'verified']);
 Route::resource('offices', OfficesController::class)->middleware(['auth', 'verified']);
 Route::resource('customers', CustomersController::class)->middleware(['auth', 'verified']);
+Route::resource('services', ServicesController::class)->middleware(['auth', 'verified']);
+Route::resource('tickets', TicketsController::class)->middleware(['auth', 'verified']);
+Route::resource('users', InfoUserController::class)->middleware(['auth', 'verified']);
+
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),

@@ -1,36 +1,28 @@
-
 import React from 'react';
 
 import Authenticated from '@/Layouts/AuthenticatedLayout.jsx';
 
-import { Head, useForm, usePage, Link } from '@inertiajs/react';
-
-
-
+import {Head, useForm, usePage, Link} from '@inertiajs/react';
 export default function Dashboard(props) {
 
 
+    const {service} = usePage().props;
 
-    const { office, offices } = usePage().props;
+    const {data, setData, put, errors} = useForm({
 
-    const { data, setData, put, errors } = useForm({
-
-        name: office.name || "",
-
-        parent_id: office.parent_id || "",
+        name: service.name || "",
+        status: service.status || "",
 
     });
-
 
 
     function handleSubmit(e) {
 
         e.preventDefault();
 
-        put(route("offices.update", office.id));
+        put(route("services.update", customer.id));
 
     }
-
 
 
     return (
@@ -41,11 +33,11 @@ export default function Dashboard(props) {
 
             errors={props.errors}
 
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Edit Office</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Update Service</h2>}
 
         >
 
-            <Head title="Offices"/>
+            <Head title="Services"/>
 
 
             <div className="col-12">
@@ -53,13 +45,13 @@ export default function Dashboard(props) {
                     <div className="card-header pb-0">
                         <div className="d-flex flex-row justify-content-between">
                             <div>
-                                <h5 className="mb-0">Add Office</h5>
+                                <h5 className="mb-0">Update Service</h5>
                             </div>
                             <Link
 
                                 className="btn bg-gradient-primary btn-sm mb-0" type="button"
 
-                                href={route("offices.index")}
+                                href={route("services.index")}
 
                             >
 
@@ -105,41 +97,40 @@ export default function Dashboard(props) {
                                         </span>
 
                                 </div>
-                                <div className="mb-0">
 
-                                    <label className="">Parent</label>
+                                <div className="mb-2">
 
-                                    <select className="w-full rounded" label="parent_id"
+                                    <label className="">Status</label>
 
-                                            name="parent_id"
+                                    <input
 
-                                            errors={errors.parent_id}
+                                        type="text"
 
-                                            value={data.parent_id}
+                                        className="w-full rounded"
 
-                                            onChange={(e) =>
+                                        label="Status"
 
-                                                setData("parent_id", e.target.value)
+                                        name="status"
 
-                                            }>
-                                        <option value="0">No Parent</option>
-                                        {
-                                            offices.map((val, index) => {
-                                                return (
-                                                    <option key={index} value={val.id}>{val.name}</option>
-                                                );
-                                            })
+                                        errors={errors.status}
+
+                                        value={data.status}
+
+                                        onChange={(e) =>
+
+                                            setData("status", e.target.value)
+
                                         }
-                                    </select>
+
+                                    />
 
                                     <span className="text-red-600">
 
-                                            {errors.parent_id}
+                                            {errors.status}
 
                                         </span>
 
                                 </div>
-
 
                             </div>
 
@@ -159,6 +150,7 @@ export default function Dashboard(props) {
 
                             </div>
 
+
                         </form>
 
 
@@ -168,9 +160,9 @@ export default function Dashboard(props) {
 
             </div>
 
-
         </Authenticated>
 
-    );
+    )
+        ;
 
 }

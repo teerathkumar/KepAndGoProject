@@ -1,36 +1,27 @@
-
 import React from 'react';
 
 import Authenticated from '@/Layouts/AuthenticatedLayout.jsx';
 
-import { Head, useForm, usePage, Link } from '@inertiajs/react';
-
+import {Head, useForm, Link} from '@inertiajs/react';
 
 
 export default function Dashboard(props) {
 
 
+    const {data, setData, errors, post} = useForm({
 
-    const { office, offices } = usePage().props;
-
-    const { data, setData, put, errors } = useForm({
-
-        name: office.name || "",
-
-        parent_id: office.parent_id || "",
+        name: ""
 
     });
-
 
 
     function handleSubmit(e) {
 
         e.preventDefault();
 
-        put(route("offices.update", office.id));
+        post(route("services.store"));
 
     }
-
 
 
     return (
@@ -41,11 +32,11 @@ export default function Dashboard(props) {
 
             errors={props.errors}
 
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Edit Office</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Create Service</h2>}
 
         >
 
-            <Head title="Offices"/>
+            <Head title="Leads"/>
 
 
             <div className="col-12">
@@ -53,13 +44,13 @@ export default function Dashboard(props) {
                     <div className="card-header pb-0">
                         <div className="d-flex flex-row justify-content-between">
                             <div>
-                                <h5 className="mb-0">Add Office</h5>
+                                <h5 className="mb-0">Add Service</h5>
                             </div>
                             <Link
 
                                 className="btn bg-gradient-primary btn-sm mb-0" type="button"
 
-                                href={route("offices.index")}
+                                href={route("services.index")}
 
                             >
 
@@ -105,40 +96,6 @@ export default function Dashboard(props) {
                                         </span>
 
                                 </div>
-                                <div className="mb-0">
-
-                                    <label className="">Parent</label>
-
-                                    <select className="w-full rounded" label="parent_id"
-
-                                            name="parent_id"
-
-                                            errors={errors.parent_id}
-
-                                            value={data.parent_id}
-
-                                            onChange={(e) =>
-
-                                                setData("parent_id", e.target.value)
-
-                                            }>
-                                        <option value="0">No Parent</option>
-                                        {
-                                            offices.map((val, index) => {
-                                                return (
-                                                    <option key={index} value={val.id}>{val.name}</option>
-                                                );
-                                            })
-                                        }
-                                    </select>
-
-                                    <span className="text-red-600">
-
-                                            {errors.parent_id}
-
-                                        </span>
-
-                                </div>
 
 
                             </div>
@@ -153,7 +110,7 @@ export default function Dashboard(props) {
 
                                 >
 
-                                    Update
+                                    Save
 
                                 </button>
 
@@ -167,7 +124,6 @@ export default function Dashboard(props) {
                 </div>
 
             </div>
-
 
         </Authenticated>
 

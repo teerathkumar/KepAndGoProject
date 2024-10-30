@@ -106,7 +106,7 @@ export default function (props) {
                                             </div>
                                         </td>
                                         <td className="ps-4">
-                                            <p className="text-xs font-weight-bold mb-0">{val.name}</p>
+                                            <p className="text-xs font-weight-bold mb-0">{val.title}</p>
                                         </td>
 
                                         <td className="ps-4">
@@ -119,7 +119,7 @@ export default function (props) {
                                             <span className="badge badge-sm bg-gradient-success">Online</span>
                                         </td>
                                         <td className="align-middle text-center text-sm">
-                                            <span className="badge badge-sm bg-gradient-success">Online</span>
+                                            <p className="text-xs font-weight-bold mb-0">{val.created_at}</p>
                                         </td>
                                         <td>
                                             <Link
@@ -130,7 +130,7 @@ export default function (props) {
                                                 data-bs-toggle="tooltip"
                                                 data-bs-original-title="Edit user"
 
-                                                href={route("customers.edit", val.id)}
+                                                href={route("leads.edit", val.id)}
 
                                             >
                                                 <i className="fas fa-user-edit text-secondary"></i>

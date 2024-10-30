@@ -1,29 +1,27 @@
-import React, { useCallback, useState } from 'react';
+import React, {useCallback, useState} from 'react';
 
 // import Authenticated from '@/Layouts/Authenticated';
 
 import Authenticated from '@/Layouts/AuthenticatedLayout.jsx'
 
-import { Inertia } from "@inertiajs/inertia";
+import {Inertia} from "@inertiajs/inertia";
+import Modal from "@/Components/Modal.jsx";
 
+import {Head, usePage, Link} from '@inertiajs/react';
 
-import { Head, usePage, Link } from '@inertiajs/react';
+export default function (props) {
 
-export default function Dashboard(props) {
-
-    const { offices } = usePage().props
+    const {tickets} = usePage().props
 
     function destroy(e) {
 
-        if (confirm("Are you sure you want to delete this office?")) {
+        if (confirm("Are you sure you want to delete this ticket?")) {
 
-            Inertia.delete(route("offices.destroy", e.currentTarget.id));
+            Inertia.delete(route("tickets.destroy", e.currentTarget.id));
 
         }
 
     }
-
-
 
     return (
 
@@ -33,28 +31,29 @@ export default function Dashboard(props) {
 
             errors={props.errors}
 
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Offices</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Tickets</h2>}
 
         >
 
-            <Head title="Offices"/>
+            {/*<Modal children={"hello"} closeable={true} show={true}/>*/}
+            <Head title="Leads"/>
 
             <div className="col-12">
                 <div className="card mb-4 mx-4">
                     <div className="card-header pb-0">
                         <div className="d-flex flex-row justify-content-between">
                             <div>
-                                <h5 className="mb-0">All Offices</h5>
+                                <h5 className="mb-0">All Tickets</h5>
                             </div>
                             <Link
 
                                 className="btn bg-gradient-primary btn-sm mb-0" type="button"
 
-                                href={route("offices.create")}
+                                href={route("tickets.create")}
 
                             >
 
-                                +&nbsp; Create Office
+                                +&nbsp; Create Ticket
 
                             </Link>
                         </div>
@@ -68,10 +67,16 @@ export default function Dashboard(props) {
                                         ID
                                     </th>
                                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                        Office Name
+                                        Title
                                     </th>
                                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                        Parent
+                                        Lead
+                                    </th>
+                                    <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
+                                        User
+                                    </th>
+                                    <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
+                                        Status
                                     </th>
                                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
                                         Creation Date
@@ -83,7 +88,7 @@ export default function Dashboard(props) {
                                 </thead>
                                 <tbody>
 
-                                {offices.map((val, index) => (
+                                {tickets.map((val, index) => (
 
                                     <tr key={index}>
 
@@ -92,13 +97,17 @@ export default function Dashboard(props) {
 
                                         </td>
                                         <td className="ps-4">
-                                            <p className="text-xs font-weight-bold mb-0">{val.name}</p>
+                                            <p className="text-xs font-weight-bold mb-0">{val.title}</p>
                                         </td>
 
-                                        <td className="align-middle text-center text-sm">
-                                            <p className="text-xs font-weight-bold mb-0">
-                                                {val.parent_id ? val.parent.name : "No Parent"}
-                                            </p>
+                                        <td className="ps-4">
+                                            <p className="text-xs font-weight-bold mb-0">{val.lead_id}</p>
+                                        </td>
+                                        <td className="ps-4">
+                                            <p className="text-xs font-weight-bold mb-0">{val.user_id}</p>
+                                        </td>
+                                        <td className="align-middle text-sm">
+                                            <span className="badge badge-sm bg-gradient-success">Online</span>
                                         </td>
                                         <td className="align-middle text-center text-sm">
                                             <p className="text-xs font-weight-bold mb-0">{val.created_at}</p>
@@ -110,9 +119,9 @@ export default function Dashboard(props) {
 
                                                 className="mx-3"
                                                 data-bs-toggle="tooltip"
-                                                data-bs-original-title="Edit"
+                                                data-bs-original-title="Edit user"
 
-                                                href={route("offices.edit", val.id)}
+                                                href={route("tickets.edit", val.id)}
 
                                             >
                                                 <i className="fas fa-user-edit text-secondary"></i>
@@ -143,13 +152,13 @@ export default function Dashboard(props) {
                                 ))}
 
 
-                                {offices.length === 0 && (
+                                {tickets.length === 0 && (
 
                                     <tr>
 
                                         <td colSpan="8" align={"center"}>
 
-                                            <p className="text-xs font-weight-bold mb-0">No offices found.</p>
+                                        <p className="text-xs font-weight-bold mb-0">No tickets found.</p>
 
                                         </td>
 
@@ -166,8 +175,7 @@ export default function Dashboard(props) {
             </div>
 
 
+
         </Authenticated>
-
-    );
-
+    )
 }

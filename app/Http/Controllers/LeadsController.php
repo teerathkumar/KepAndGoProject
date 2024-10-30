@@ -6,6 +6,7 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Lead;
+use Illuminate\Support\Facades\Validator;
 
 class LeadsController extends Controller
 {

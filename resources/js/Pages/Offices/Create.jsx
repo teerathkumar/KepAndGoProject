@@ -44,154 +44,121 @@ export default function Dashboard(props) {
 
         >
 
-            <Head title="Offices" />
+            <Head title="Offices"/>
 
-
-
-            <div>
-
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-
-                        <div className="p-6 bg-white border-b border-gray-200">
-
-
-
-                            <div className="flex items-center justify-between mb-6">
-
-                                <Link
-
-                                    className="px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none"
-
-                                    href={ route("offices.index") }
-
-                                >
-
-                                    Back
-
-                                </Link>
-
+            <div className="col-12">
+                <div className="card mb-4 mx-4">
+                    <div className="card-header pb-0">
+                        <div className="d-flex flex-row justify-content-between">
+                            <div>
+                                <h5 className="mb-0">Add Office</h5>
                             </div>
+                            <Link
+
+                                className="btn bg-gradient-primary btn-sm mb-0" type="button"
+
+                                href={route("offices.index")}
+
+                            >
+
+                                Back
+
+                            </Link>
+
+                        </div>
 
 
+                        <form name="createForm" onSubmit={handleSubmit}>
 
-                            <form name="createForm" onSubmit={handleSubmit}>
+                            <div className="flex flex-col">
 
-                                <div className="flex flex-col">
+                                <div className="mb-2">
 
-                                    <div className="mb-4">
+                                    <label className="">Name</label>
 
-                                        <label className="">Name</label>
+                                    <input
 
-                                        <input
+                                        type="text"
 
-                                            type="text"
+                                        className="w-full rounded"
 
-                                            className="w-full px-4 py-2"
+                                        label="Name"
 
-                                            label="Name"
+                                        name="name"
 
-                                            name="name"
+                                        value={data.name}
 
-                                            value={data.name}
+                                        onChange={(e) =>
 
-                                            onChange={(e) =>
+                                            setData("name", e.target.value)
 
-                                                setData("name", e.target.value)
+                                        }
 
-                                            }
+                                    />
 
-                                        />
-
-                                        <span className="text-red-600">
+                                    <span className="text-red-600">
 
                                             {errors.name}
 
                                         </span>
 
-                                    </div>
+                                </div>
+                                <div className="mb-0">
 
-                                    <div className="mb-0">
+                                    <label className="">Parent</label>
 
-                                        <label className="">Parent</label>
+                                    <select className="w-full rounded" label="parent_id"
 
-                                        <select className="w-full rounded" label="parent_id"
+                                            name="parent_id"
 
-                                                name="parent_id"
+                                            errors={errors.parent_id}
 
-                                                errors={errors.parent_id}
+                                            value={data.parent_id}
 
-                                                value={data.parent_id}
+                                            onChange={(e) =>
 
-                                                onChange={(e) =>
+                                                setData("parent_id", e.target.value)
 
-                                                    setData("parent_id", e.target.value)
+                                            }>
+                                        <option value="0">No Parent</option>
+                                        {
+                                            offices.map((val, index) => {
+                                                return (
+                                                    <option key={index} value={val.id}>{val.name}</option>
+                                                );
+                                            })
+                                        }
+                                    </select>
 
-                                                }>
-                                            <option value="0">No Parent</option>
-                                            {
-                                                offices.map((val, index) => {
-                                                    return (
-                                                        <option key={index} value={val.id}>{val.name}</option>
-                                                    );
-                                                })
-                                            }
-                                        </select>
-
-                                        {/*<textarea*/}
-
-                                        {/*    type="text"*/}
-
-                                        {/*    className="w-full rounded"*/}
-
-                                        {/*    label="parent_id"*/}
-
-                                        {/*    name="parent_id"*/}
-
-                                        {/*    errors={errors.parent_id}*/}
-
-                                        {/*    value={data.parent_id}*/}
-
-                                        {/*    onChange={(e) =>*/}
-
-                                        {/*        setData("parent_id", e.target.value)*/}
-
-                                        {/*    }*/}
-
-                                        {/*/>*/}
-
-                                        <span className="text-red-600">
+                                    <span className="text-red-600">
 
                                             {errors.parent_id}
 
                                         </span>
 
-                                    </div>
-
                                 </div>
 
-                                <div className="mt-4">
 
-                                    <button
+                            </div>
 
-                                        type="submit"
+                            <div className="mt-4">
 
-                                        className="px-6 py-2 font-bold text-white bg-green-500 rounded"
+                                <button
 
-                                    >
+                                    type="submit"
 
-                                        Save
+                                    className="btn bg-gradient-primary btn-sm mb-5"
 
-                                    </button>
+                                >
 
-                                </div>
+                                    Save
 
-                            </form>
+                                </button>
 
+                            </div>
 
+                        </form>
 
-                        </div>
 
                     </div>
 
