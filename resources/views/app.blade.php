@@ -48,12 +48,12 @@
             </div>
         @endif
         <!--   Core JS Files   -->
-        <script src="{{Vite::asset('resources/assets/js/core/popper.min.js')}}"></script>
-        <script src="{{Vite::asset('resources/assets/js/core/bootstrap.min.js')}}"></script>
-        <script src="{{Vite::asset('resources/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
-        <script src="{{Vite::asset('resources/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
-        <script src="{{Vite::asset('resources/assets/js/plugins/fullcalendar.min.js')}}"></script>
-        <script src="{{Vite::asset('resources/assets/js/plugins/chartjs.min.js')}}"></script>
+        <script type="module" src="{{Vite::asset('resources/assets/js/core/popper.min.js')}}"></script>
+        <script type="module" src="{{Vite::asset('resources/assets/js/core/bootstrap.min.js')}}"></script>
+        <script type="module" src="{{Vite::asset('resources/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
+        <script type="module" src="{{Vite::asset('resources/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
+        <script type="module" src="{{Vite::asset('resources/assets/js/plugins/fullcalendar.min.js')}}"></script>
+        <script type="module" src="{{Vite::asset('resources/assets/js/plugins/chartjs.min.js')}}"></script>
         @stack('rtl')
         @stack('dashboard')
         <!-- <script>
@@ -69,6 +69,6 @@
         <!-- Github buttons -->
         <script async defer src="https://buttons.github.io/buttons.js"></script>
         <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-        <script src="{{Vite::asset('resources/assets/js/soft-ui-dashboard.min.js')}}"></script>
+        <script type="module" src="{{Vite::asset('resources/assets/js/soft-ui-dashboard.min.js')}}"></script>
     </body>
 </html>
