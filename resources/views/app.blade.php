@@ -15,7 +15,7 @@
         <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
         <link href="{{Vite::asset('resources/assets/css/nucleo-svg.css')}}" rel="stylesheet" />
         <!-- CSS Files -->
-        <link id="pagestyle" href="{{Vite::asset('resources/assets/css/soft-ui-dashboard.css?v=1.0.3')}}" rel="stylesheet" />
+        <link id="pagestyle" href="{{Vite::asset('resources/assets/css/soft-ui-dashboard.css')}}" rel="stylesheet" />
         <!-- Scripts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
