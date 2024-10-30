@@ -104,7 +104,7 @@ return [
             explode(',', env('APP_PREVIOUS_KEYS', ''))
         ),
     ],
-
+    'Vite' => \Illuminate\Support\Facades\Vite::class,
     /*
     |--------------------------------------------------------------------------
     | Maintenance Mode Driver

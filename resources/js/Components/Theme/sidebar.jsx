@@ -1,7 +1,8 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
-import logo from '../../../assets/img/logo-ct.png';
+// import logo from '../../../assets/img/logo-ct.png';
+
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import {Link, usePage} from '@inertiajs/react';
 import {useState} from 'react';
@@ -18,8 +19,8 @@ export default function Sidebar(props) {
                 <i className="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                    aria-hidden="true" id="iconSidenav"></i>
                 <NavLink className="align-items-center d-flex m-0 navbar-brand text-wrap" href={route('dashboard')}>
-                    <img src={logo} className="navbar-brand-img h-100" alt="..."/>
-
+                    {/*<img src={logo} className="navbar-brand-img h-100" alt="..."/>*/}
+                    <img src="{{ Vite::asset('resources/assets/img/logo-ct.png') }}" className="navbar-brand-img h-100" alt="..."/>
                     <span className="ms-3 font-weight-bold">Kep & Go</span>
                 </NavLink>
 
