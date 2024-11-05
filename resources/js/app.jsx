@@ -1,7 +1,7 @@
 import '../css/app.css';
 import './bootstrap';
-// import.meta.glob([ '../assets/img/**', ]);
-
+import '../assets/img/logo-ct.png';
+import.meta.glob([ '../assets/img/**', ]);
 
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
@@ -15,7 +15,6 @@ createInertiaApp({
         resolvePageComponent(
             `./Pages/${name}.jsx`,
             import.meta.glob('./Pages/**/*.jsx'),
-            import.meta.glob([ '../assets/img/**', ])
         ),
     setup({ el, App, props }) {
         const root = createRoot(el);
