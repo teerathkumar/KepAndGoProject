@@ -110,10 +110,10 @@ export default function (props) {
                                         </td>
 
                                         <td className="ps-4">
-                                            <p className="text-xs font-weight-bold mb-0">{val.customer_id}</p>
+                                            <p className="text-xs font-weight-bold mb-0">{val.customer.name}</p>
                                         </td>
                                         <td className="ps-4">
-                                            <p className="text-xs font-weight-bold mb-0">{val.service_id}</p>
+                                            <p className="text-xs font-weight-bold mb-0">{val.service.name}</p>
                                         </td>
                                         <td className="align-middle text-center text-sm">
                                             <span className="badge badge-sm bg-gradient-success">Online</span>

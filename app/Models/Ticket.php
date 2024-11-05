@@ -10,4 +10,11 @@ class Ticket extends Model
     //
     use HasFactory;
     protected $fillable = ['title','lead_id','user_id'];
+
+    public function lead(){
+        return $this->belongsTo(Lead::class);
+    }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
