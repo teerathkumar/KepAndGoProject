@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Lead;
@@ -60,8 +61,10 @@ class LeadsController extends Controller
     public function create()
 
     {
+        $customers = Customer::all();
+        $services = Service::all();
 
-        return Inertia::render('Leads/Create');
+        return Inertia::render('Leads/Create', ['customers' => $customers, 'services' => $services]);
 
     }
 
@@ -104,10 +107,15 @@ class LeadsController extends Controller
     public function edit(Lead $lead)
 
     {
+        $customers = Customer::all();
+        $services = Service::all();
+
 
         return Inertia::render('Leads/Edit', [
 
-            'lead' => $lead
+            'lead' => $lead,
+            'customers' => $customers,
+            'services' => $services
 
         ]);
 

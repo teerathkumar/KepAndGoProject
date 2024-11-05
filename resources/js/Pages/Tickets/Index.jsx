@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from 'react';
 
 // import Authenticated from '@/Layouts/Authenticated';
-
+import moment from 'moment';
 import Authenticated from '@/Layouts/AuthenticatedLayout.jsx'
 
 import {Inertia} from "@inertiajs/inertia";
@@ -60,7 +60,7 @@ export default function (props) {
                     </div>
                     <div className="card-body px-0 pt-0 pb-2">
                         <div className="table-responsive p-0">
-                            <table className="table align-items-center mb-0">
+                            <table className="table mb-0">
                                 <thead>
                                 <tr>
                                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
@@ -106,11 +106,11 @@ export default function (props) {
                                         <td className="ps-4">
                                             <p className="text-xs font-weight-bold mb-0">{val.user.name}</p>
                                         </td>
-                                        <td className="align-middle text-sm">
+                                        <td className="text-sm">
                                             <span className="badge badge-sm bg-gradient-success">Online</span>
                                         </td>
-                                        <td className="align-middle text-center text-sm">
-                                            <p className="text-xs font-weight-bold mb-0">{val.created_at}</p>
+                                        <td className="text-sm">
+                                            <p className="text-xs font-weight-bold mb-0">{moment().format('LLLL')}</p>
                                         </td>
                                         <td>
                                             <Link

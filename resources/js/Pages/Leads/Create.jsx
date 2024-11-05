@@ -2,12 +2,13 @@ import React from 'react';
 
 import Authenticated from '@/Layouts/AuthenticatedLayout.jsx';
 
-import {Head, useForm, Link} from '@inertiajs/react';
+import {Head, useForm, Link, usePage} from '@inertiajs/react';
 
 
 export default function Dashboard(props) {
 
 
+    const { customers, services } = usePage().props;
     const {data, setData, errors, post} = useForm({
 
         title: "",
@@ -137,28 +138,28 @@ export default function Dashboard(props) {
                                 <div className="mb-2">
 
                                     <label className="">Customer</label>
+                                    <select className="w-full rounded" label="customer_id"
 
-                                    <input
+                                            name="customer_id"
 
-                                        type="text"
+                                            errors={errors.customer_id}
 
-                                        className="w-full rounded"
+                                            value={data.customer_id}
 
-                                        label="Customer ID"
+                                            onChange={(e) =>
 
-                                        name="customer_id"
+                                                setData("customer_id", e.target.value)
 
-                                        errors={errors.customer_id}
-
-                                        value={data.customer_id}
-
-                                        onChange={(e) =>
-
-                                            setData("customer_id", e.target.value)
-
+                                            }>
+                                        <option value="0">No Customer</option>
+                                        {
+                                            customers.map((val, index) => {
+                                                return (
+                                                    <option key={index} value={val.id}>{val.name}</option>
+                                                );
+                                            })
                                         }
-
-                                    />
+                                    </select>
 
                                     <span className="text-red-600">
 
@@ -171,28 +172,28 @@ export default function Dashboard(props) {
 
                                     <label className="">Service</label>
 
-                                    <input
+                                    <select className="w-full rounded" label="service_id"
 
-                                        type="text"
+                                            name="service_id"
 
-                                        className="w-full rounded"
+                                            errors={errors.service_id}
 
-                                        label="Service"
+                                            value={data.service_id}
 
-                                        name="service_id"
+                                            onChange={(e) =>
 
-                                        errors={errors.service_id}
+                                                setData("service_id", e.target.value)
 
-                                        value={data.service_id}
-
-                                        onChange={(e) =>
-
-                                            setData("service_id", e.target.value)
-
+                                            }>
+                                        <option value="0">No Service</option>
+                                        {
+                                            services.map((val, index) => {
+                                                return (
+                                                    <option key={index} value={val.id}>{val.name}</option>
+                                                );
+                                            })
                                         }
-
-                                    />
-
+                                    </select>
                                     <span className="text-red-600">
 
                                             {errors.service_id}
