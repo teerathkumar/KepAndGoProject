@@ -101,7 +101,7 @@ export default function (props) {
                                         </td>
 
                                         <td className="ps-4">
-                                            <p className="text-xs font-weight-bold mb-0">{val.lead.name}</p>
+                                            <p className="text-xs font-weight-bold mb-0">{val.lead.title}</p>
                                         </td>
                                         <td className="ps-4">
                                             <p className="text-xs font-weight-bold mb-0">{val.user.name}</p>
