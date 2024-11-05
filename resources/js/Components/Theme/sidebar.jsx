@@ -1,7 +1,6 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
-import mylogo from '@/img/logo-ct.png';
 // import logo from '../../../assets/img/logo-ct.png';
 
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
@@ -22,7 +21,7 @@ export default function Sidebar(props) {
                 <NavLink className="align-items-center d-flex m-0 navbar-brand text-wrap" href={route('dashboard')}>
                     {/*<img src={logo} className="navbar-brand-img h-100" alt="..."/>*/}
                     {/*<img src="{{ Vite::asset('resources/assets/img/logo-ct.png') }}" className="navbar-brand-img h-100" alt="..."/>*/}
-                    <img src={mylogo} className="navbar-brand-img h-100"
+                    <img src="../../img/logo-ct.png" className="navbar-brand-img h-100"
                          alt="..."/>
                     <span className="ms-3 font-weight-bold">Kep & Go</span>
                 </NavLink>
