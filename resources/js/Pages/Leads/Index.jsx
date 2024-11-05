@@ -101,7 +101,7 @@ export default function (props) {
                                         </td>
                                         <td className="ps-4">
                                             <div>
-                                                <img src="../assets/img/team-2.jpg"
+                                                <img src="./assets/img/team-2.jpg"
                                                      className="avatar avatar-sm me-3"/>
                                             </div>
                                         </td>

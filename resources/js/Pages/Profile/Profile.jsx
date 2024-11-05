@@ -41,14 +41,14 @@ export default function (props) {
             <div>
                 <div className="container-fluid">
                     <div className="page-header min-height-150 border-radius-xl"
-                         style={{backgroundImage: "url('../assets/img/curved-images/curved0.jpg'); background-position-y: 50%;"}}>
+                         style={{backgroundImage: "url('./assets/img/curved-images/curved0.jpg'); background-position-y: 50%;"}}>
                         <span className="mask bg-gradient-primary opacity-6"></span>
                     </div>
                     <div className="card card-body shadow-blur mx-4 mt-n6 overflow-hidden">
                             <div className="row gx-4">
                                 <div className="col-auto">
                                     <div className="avatar avatar-xl position-relative">
-                                        <img src="../assets/img/bruce-mars.jpg" alt="..."
+                                        <img src="./assets/img/bruce-mars.jpg" alt="..."
                                              className="w-100 border-radius-lg shadow-sm"/>
                                         <a href="javascript:;"
                                            className="btn btn-sm btn-icon-only bg-gradient-light position-absolute bottom-0 end-0 mb-n2 me-n2">
@@ -332,7 +332,7 @@ export default function (props) {
                                     <ul className="list-group">
                                         <li className="list-group-item border-0 d-flex align-items-center px-0 mb-2">
                                             <div className="avatar me-3">
-                                                <img src="../assets/img/kal-visuals-square.jpg" alt="kal"
+                                                <img src="./assets/img/kal-visuals-square.jpg" alt="kal"
                                                      className="border-radius-lg shadow"/>
                                             </div>
                                             <div
@@ -344,7 +344,7 @@ export default function (props) {
                                         </li>
                                         <li className="list-group-item border-0 d-flex align-items-center px-0 mb-2">
                                             <div className="avatar me-3">
-                                                <img src="../assets/img/marie.jpg" alt="kal"
+                                                <img src="./assets/img/marie.jpg" alt="kal"
                                                      className="border-radius-lg shadow"/>
                                             </div>
                                             <div
@@ -356,7 +356,7 @@ export default function (props) {
                                         </li>
                                         <li className="list-group-item border-0 d-flex align-items-center px-0 mb-2">
                                             <div className="avatar me-3">
-                                                <img src="../assets/img/ivana-square.jpg" alt="kal"
+                                                <img src="./assets/img/ivana-square.jpg" alt="kal"
                                                      className="border-radius-lg shadow"/>
                                             </div>
                                             <div
@@ -368,7 +368,7 @@ export default function (props) {
                                         </li>
                                         <li className="list-group-item border-0 d-flex align-items-center px-0 mb-2">
                                             <div className="avatar me-3">
-                                                <img src="../assets/img/team-4.jpg" alt="kal"
+                                                <img src="./assets/img/team-4.jpg" alt="kal"
                                                      className="border-radius-lg shadow"/>
                                             </div>
                                             <div
@@ -380,7 +380,7 @@ export default function (props) {
                                         </li>
                                         <li className="list-group-item border-0 d-flex align-items-center px-0">
                                             <div className="avatar me-3">
-                                                <img src="../assets/img/team-3.jpg" alt="kal"
+                                                <img src="./assets/img/team-3.jpg" alt="kal"
                                                      className="border-radius-lg shadow"/>
                                             </div>
                                             <div
@@ -406,7 +406,7 @@ export default function (props) {
                                             <div className="card card-blog card-plain">
                                                 <div className="position-relative">
                                                     <a className="d-block shadow-xl border-radius-xl">
-                                                        <img src="../assets/img/home-decor-1.jpg" alt="img-blur-shadow"
+                                                        <img src="./assets/img/home-decor-1.jpg" alt="img-blur-shadow"
                                                              className="img-fluid shadow border-radius-xl"/>
                                                     </a>
                                                 </div>
@@ -431,25 +431,25 @@ export default function (props) {
                                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                title="Elena Morison">
                                                                 <img alt="Image placeholder"
-                                                                     src="../assets/img/team-1.jpg"/>
+                                                                     src="./assets/img/team-1.jpg"/>
                                                             </a>
                                                             <a href="" className="avatar avatar-xs rounded-circle"
                                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                title="Ryan Milly">
                                                                 <img alt="Image placeholder"
-                                                                     src="../assets/img/team-2.jpg"/>
+                                                                     src="./assets/img/team-2.jpg"/>
                                                             </a>
                                                             <a href="" className="avatar avatar-xs rounded-circle"
                                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                title="Nick Daniel">
                                                                 <img alt="Image placeholder"
-                                                                     src="../assets/img/team-3.jpg"/>
+                                                                     src="./assets/img/team-3.jpg"/>
                                                             </a>
                                                             <a href="" className="avatar avatar-xs rounded-circle"
                                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                title="Peterson">
                                                                 <img alt="Image placeholder"
-                                                                     src="../assets/img/team-4.jpg"/>
+                                                                     src="./assets/img/team-4.jpg"/>
                                                             </a>
                                                         </div>
                                                     </div>
@@ -460,7 +460,7 @@ export default function (props) {
                                             <div className="card card-blog card-plain">
                                                 <div className="position-relative">
                                                     <a className="d-block shadow-xl border-radius-xl">
-                                                        <img src="../assets/img/home-decor-2.jpg" alt="img-blur-shadow"
+                                                        <img src="./assets/img/home-decor-2.jpg" alt="img-blur-shadow"
                                                              className="img-fluid shadow border-radius-lg"/>
                                                     </a>
                                                 </div>
@@ -485,25 +485,25 @@ export default function (props) {
                                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                title="Nick Daniel">
                                                                 <img alt="Image placeholder"
-                                                                     src="../assets/img/team-3.jpg"/>
+                                                                     src="./assets/img/team-3.jpg"/>
                                                             </a>
                                                             <a href="" className="avatar avatar-xs rounded-circle"
                                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                title="Peterson">
                                                                 <img alt="Image placeholder"
-                                                                     src="../assets/img/team-4.jpg"/>
+                                                                     src="./assets/img/team-4.jpg"/>
                                                             </a>
                                                             <a href="" className="avatar avatar-xs rounded-circle"
                                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                title="Elena Morison">
                                                                 <img alt="Image placeholder"
-                                                                     src="../assets/img/team-1.jpg"/>
+                                                                     src="./assets/img/team-1.jpg"/>
                                                             </a>
                                                             <a href="" className="avatar avatar-xs rounded-circle"
                                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                title="Ryan Milly">
                                                                 <img alt="Image placeholder"
-                                                                     src="../assets/img/team-2.jpg"/>
+                                                                     src="./assets/img/team-2.jpg"/>
                                                             </a>
                                                         </div>
                                                     </div>
@@ -514,7 +514,7 @@ export default function (props) {
                                             <div className="card card-blog card-plain">
                                                 <div className="position-relative">
                                                     <a className="d-block shadow-xl border-radius-xl">
-                                                        <img src="../assets/img/home-decor-3.jpg" alt="img-blur-shadow"
+                                                        <img src="./assets/img/home-decor-3.jpg" alt="img-blur-shadow"
                                                              className="img-fluid shadow border-radius-xl"/>
                                                     </a>
                                                 </div>
@@ -539,25 +539,25 @@ export default function (props) {
                                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                title="Peterson">
                                                                 <img alt="Image placeholder"
-                                                                     src="../assets/img/team-4.jpg"/>
+                                                                     src="./assets/img/team-4.jpg"/>
                                                             </a>
                                                             <a href="" className="avatar avatar-xs rounded-circle"
                                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                title="Nick Daniel">
                                                                 <img alt="Image placeholder"
-                                                                     src="../assets/img/team-3.jpg"/>
+                                                                     src="./assets/img/team-3.jpg"/>
                                                             </a>
                                                             <a href="" className="avatar avatar-xs rounded-circle"
                                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                title="Ryan Milly">
                                                                 <img alt="Image placeholder"
-                                                                     src="../assets/img/team-2.jpg"/>
+                                                                     src="./assets/img/team-2.jpg"/>
                                                             </a>
                                                             <a href="" className="avatar avatar-xs rounded-circle"
                                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                title="Elena Morison">
                                                                 <img alt="Image placeholder"
-                                                                     src="../assets/img/team-1.jpg"/>
+                                                                     src="./assets/img/team-1.jpg"/>
                                                             </a>
                                                         </div>
                                                     </div>

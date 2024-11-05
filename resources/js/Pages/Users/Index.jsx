@@ -85,7 +85,7 @@ export default function (props) {
                                         </td>
                                         <td>
                                             <div>
-                                                <img src="../assets/img/team-2.jpg" className="avatar avatar-sm me-3"/>
+                                                <img src="./assets/img/team-2.jpg" className="avatar avatar-sm me-3"/>
                                             </div>
                                         </td>
                                         <td className="text-center">

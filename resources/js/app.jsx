@@ -1,7 +1,7 @@
 import '../css/app.css';
 import './bootstrap';
-import '../assets/img/logo-ct.png';
-import.meta.glob([ '../assets/img/**', ]);
+import './assets/img/logo-ct.png';
+import.meta.glob([ './assets/img/**', ]);
 
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
