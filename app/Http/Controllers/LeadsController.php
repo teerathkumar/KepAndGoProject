@@ -44,7 +44,7 @@ class LeadsController extends Controller
 //            ]
 //        );
 
-        $leads = Lead::all();
+        $leads = Lead::with('customer','service')->get();
 
         return Inertia::render('Leads/Index', ['leads' => $leads]);
 

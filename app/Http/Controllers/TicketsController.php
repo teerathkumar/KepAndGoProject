@@ -14,7 +14,7 @@ class TicketsController extends Controller
 
     {
 
-        $tickets = Ticket::all();
+        $tickets = Ticket::with('lead','user')::get();
 
         return Inertia::render('Tickets/Index', ['tickets' => $tickets]);
 
