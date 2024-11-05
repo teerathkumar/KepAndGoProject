@@ -6,15 +6,15 @@ import {Head, useForm, usePage, Link} from '@inertiajs/react';
 export default function Dashboard(props) {
 
 
-    const {lead} = usePage().props;
+    const {lead, customers, services} = usePage().props;
 
     const {data, setData, put, errors} = useForm({
 
-        title: customer.title || "",
+        title: lead.title || "",
 
-        body: customer.body || "",
-        customer_id: customer.customer_id || "",
-        service_id: customer.service_id || "",
+        body: lead.body || "",
+        customer_id: lead.customer_id || "",
+        service_id: lead.service_id || "",
 
     });
 
@@ -138,27 +138,28 @@ export default function Dashboard(props) {
 
                                     <label className="">Customer</label>
 
-                                    <input
+                                    <select className="w-full rounded" label="customer_id"
 
-                                        type="text"
+                                            name="customer_id"
 
-                                        className="w-full rounded"
+                                            errors={errors.customer_id}
 
-                                        label="Customer ID"
+                                            value={data.customer_id}
 
-                                        name="customer_id"
+                                            onChange={(e) =>
 
-                                        errors={errors.customer_id}
+                                                setData("customer_id", e.target.value)
 
-                                        value={data.customer_id}
-
-                                        onChange={(e) =>
-
-                                            setData("customer_id", e.target.value)
-
+                                            }>
+                                        <option value="0">No Customer</option>
+                                        {
+                                            customers.map((val, index) => {
+                                                return (
+                                                    <option key={index} value={val.id}>{val.name}</option>
+                                                );
+                                            })
                                         }
-
-                                    />
+                                    </select>
 
                                     <span className="text-red-600">
 
@@ -171,28 +172,28 @@ export default function Dashboard(props) {
 
                                     <label className="">Service</label>
 
-                                    <input
+                                    <select className="w-full rounded" label="service_id"
 
-                                        type="text"
+                                            name="service_id"
 
-                                        className="w-full rounded"
+                                            errors={errors.service_id}
 
-                                        label="Service"
+                                            value={data.service_id}
 
-                                        name="service_id"
+                                            onChange={(e) =>
 
-                                        errors={errors.service_id}
+                                                setData("service_id", e.target.value)
 
-                                        value={data.service_id}
-
-                                        onChange={(e) =>
-
-                                            setData("service_id", e.target.value)
-
+                                            }>
+                                        <option value="0">No Service</option>
+                                        {
+                                            services.map((val, index) => {
+                                                return (
+                                                    <option key={index} value={val.id}>{val.name}</option>
+                                                );
+                                            })
                                         }
-
-                                    />
-
+                                    </select>
                                     <span className="text-red-600">
 
                                             {errors.service_id}

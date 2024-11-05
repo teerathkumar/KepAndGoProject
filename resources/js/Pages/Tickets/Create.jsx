@@ -2,12 +2,13 @@ import React from 'react';
 
 import Authenticated from '@/Layouts/AuthenticatedLayout.jsx';
 
-import {Head, useForm, Link} from '@inertiajs/react';
+import {Head, useForm, Link,usePage} from '@inertiajs/react';
 
 
 export default function Dashboard(props) {
 
 
+    const {leads, users} = usePage().props;
     const {data, setData, errors, post} = useForm({
 
         title: "",
@@ -103,28 +104,28 @@ export default function Dashboard(props) {
 
                                     <label className="">Lead</label>
 
-                                    <input
+                                    <select className="w-full rounded" label="lead_id"
 
-                                        type="text"
+                                            name="lead_id"
 
-                                        className="w-full rounded"
+                                            errors={errors.lead_id}
 
-                                        label="Lead"
+                                            value={data.lead_id}
 
-                                        name="lead"
+                                            onChange={(e) =>
 
-                                        errors={errors.lead_id}
+                                                setData("lead_id", e.target.value)
 
-                                        value={data.lead_id}
-
-                                        onChange={(e) =>
-
-                                            setData("lead_id", e.target.value)
-
+                                            }>
+                                        <option value="0">No Lead</option>
+                                        {
+                                            leads.map((val, index) => {
+                                                return (
+                                                    <option key={index} value={val.id}>{val.title}</option>
+                                                );
+                                            })
                                         }
-
-                                    />
-
+                                    </select>
                                     <span className="text-red-600">
 
                                             {errors.lead_id}
@@ -137,28 +138,28 @@ export default function Dashboard(props) {
 
                                     <label className="">User</label>
 
-                                    <input
+                                    <select className="w-full rounded" label="user_id"
 
-                                        type="text"
+                                            name="user_id"
 
-                                        className="w-full rounded"
+                                            errors={errors.user_id}
 
-                                        label="User"
+                                            value={data.user_id}
 
-                                        name="user_id"
+                                            onChange={(e) =>
 
-                                        errors={errors.user_id}
+                                                setData("user_id", e.target.value)
 
-                                        value={data.user_id}
-
-                                        onChange={(e) =>
-
-                                            setData("user_id", e.target.value)
-
+                                            }>
+                                        <option value="0">No User</option>
+                                        {
+                                            users.map((val, index) => {
+                                                return (
+                                                    <option key={index} value={val.id}>{val.name}</option>
+                                                );
+                                            })
                                         }
-
-                                    />
-
+                                    </select>
                                     <span className="text-red-600">
 
                                             {errors.user_id}

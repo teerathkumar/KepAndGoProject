@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lead;
+use App\Models\User;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -30,7 +32,10 @@ class TicketsController extends Controller
     public function create()
 
     {
-        return Inertia::render('Tickets/Create');
+        $users = User::all();
+        $leads = Lead::all();
+
+        return Inertia::render('Tickets/Create', ['users' => $users, 'leads' => $leads]);
 
     }
 
@@ -71,9 +76,13 @@ class TicketsController extends Controller
     public function edit(Ticket $ticket)
 
     {
+        $users = User::all();
+        $leads = Lead::all();
         return Inertia::render('Tickets/Edit', [
 
-            'ticket' => $ticket
+            'ticket' => $ticket,
+            'users' => $users,
+            'leads' => $leads
 
         ]);
 

@@ -6,7 +6,7 @@ import {Head, useForm, usePage, Link} from '@inertiajs/react';
 export default function Dashboard(props) {
 
 
-    const {ticket} = usePage().props;
+    const {ticket, leads, users} = usePage().props;
 
     const {data, setData, put, errors} = useForm({
 
@@ -105,27 +105,28 @@ export default function Dashboard(props) {
 
                                     <label className="">Lead</label>
 
-                                    <input
+                                    <select className="w-full rounded" label="lead_id"
 
-                                        type="text"
+                                            name="lead_id"
 
-                                        className="w-full rounded"
+                                            errors={errors.lead_id}
 
-                                        label="Lead"
+                                            value={data.lead_id}
 
-                                        name="lead"
+                                            onChange={(e) =>
 
-                                        errors={errors.lead_id}
+                                                setData("lead_id", e.target.value)
 
-                                        value={data.lead_id}
-
-                                        onChange={(e) =>
-
-                                            setData("lead_id", e.target.value)
-
+                                            }>
+                                        <option value="0">No Lead</option>
+                                        {
+                                            leads.map((val, index) => {
+                                                return (
+                                                    <option key={index} value={val.id}>{val.title}</option>
+                                                );
+                                            })
                                         }
-
-                                    />
+                                    </select>
 
                                     <span className="text-red-600">
 
@@ -139,27 +140,29 @@ export default function Dashboard(props) {
 
                                     <label className="">User</label>
 
-                                    <input
 
-                                        type="text"
+                                    <select className="w-full rounded" label="user_id"
 
-                                        className="w-full rounded"
+                                            name="user_id"
 
-                                        label="User"
+                                            errors={errors.user_id}
 
-                                        name="user_id"
+                                            value={data.user_id}
 
-                                        errors={errors.user_id}
+                                            onChange={(e) =>
 
-                                        value={data.user_id}
+                                                setData("user_id", e.target.value)
 
-                                        onChange={(e) =>
-
-                                            setData("user_id", e.target.value)
-
+                                            }>
+                                        <option value="0">No User</option>
+                                        {
+                                            users.map((val, index) => {
+                                                return (
+                                                    <option key={index} value={val.id}>{val.name}</option>
+                                                );
+                                            })
                                         }
-
-                                    />
+                                    </select>
 
                                     <span className="text-red-600">
 
@@ -168,39 +171,7 @@ export default function Dashboard(props) {
                                         </span>
 
                                 </div>
-                                <div className="mb-2">
 
-                                    <label className="">User</label>
-
-                                    <input
-
-                                        type="text"
-
-                                        className="w-full rounded"
-
-                                        label="User"
-
-                                        name="user_id"
-
-                                        errors={errors.user_id}
-
-                                        value={data.user_id}
-
-                                        onChange={(e) =>
-
-                                            setData("user_id", e.target.value)
-
-                                        }
-
-                                    />
-
-                                    <span className="text-red-600">
-
-                                            {errors.user_id}
-
-                                        </span>
-
-                                </div>
                                 <div className="mb-2">
 
                                     <label className="">Status</label>
