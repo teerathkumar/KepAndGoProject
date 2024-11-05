@@ -504,7 +504,7 @@ export default function Dashboard() {
                                         <td>
                                             <div className="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="../assets/img/small-logos/logo-xd.svg"
+                                                    <img src="./assets/img/small-logos/logo-xd.svg"
                                                          className="avatar avatar-sm me-3" alt="xd"/>
                                                 </div>
                                                 <div className="d-flex flex-column justify-content-center">
@@ -517,22 +517,22 @@ export default function Dashboard() {
                                                 <a href="" className="avatar avatar-xs rounded-circle"
                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                    title="Ryan Tompson">
-                                                    <img src="../assets/img/team-1.jpg" alt="team1"/>
+                                                    <img src="./assets/img/team-1.jpg" alt="team1"/>
                                                 </a>
                                                 <a href="" className="avatar avatar-xs rounded-circle"
                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                    title="Romina Hadid">
-                                                    <img src="../assets/img/team-2.jpg" alt="team2"/>
+                                                    <img src="./assets/img/team-2.jpg" alt="team2"/>
                                                 </a>
                                                 <a href="" className="avatar avatar-xs rounded-circle"
                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                    title="Alexander Smith">
-                                                    <img src="../assets/img/team-3.jpg" alt="team3"/>
+                                                    <img src="./assets/img/team-3.jpg" alt="team3"/>
                                                 </a>
                                                 <a href="" className="avatar avatar-xs rounded-circle"
                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                    title="Jessica Doe">
-                                                    <img src="../assets/img/team-4.jpg" alt="team4"/>
+                                                    <img src="./assets/img/team-4.jpg" alt="team4"/>
                                                 </a>
                                             </div>
                                         </td>
@@ -558,7 +558,7 @@ export default function Dashboard() {
                                         <td>
                                             <div className="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="../assets/img/small-logos/logo-atlassian.svg"
+                                                    <img src="./assets/img/small-logos/logo-atlassian.svg"
                                                          className="avatar avatar-sm me-3" alt="atlassian"/>
                                                 </div>
                                                 <div className="d-flex flex-column justify-content-center">
@@ -571,12 +571,12 @@ export default function Dashboard() {
                                                 <a href="" className="avatar avatar-xs rounded-circle"
                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                    title="Romina Hadid">
-                                                    <img src="../assets/img/team-2.jpg" alt="team5"/>
+                                                    <img src="./assets/img/team-2.jpg" alt="team5"/>
                                                 </a>
                                                 <a href="" className="avatar avatar-xs rounded-circle"
                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                    title="Jessica Doe">
-                                                    <img src="../assets/img/team-4.jpg" alt="team6"/>
+                                                    <img src="./assets/img/team-4.jpg" alt="team6"/>
                                                 </a>
                                             </div>
                                         </td>
@@ -602,7 +602,7 @@ export default function Dashboard() {
                                         <td>
                                             <div className="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="../assets/img/small-logos/logo-slack.svg"
+                                                    <img src="./assets/img/small-logos/logo-slack.svg"
                                                          className="avatar avatar-sm me-3" alt="team7"/>
                                                 </div>
                                                 <div className="d-flex flex-column justify-content-center">
@@ -615,12 +615,12 @@ export default function Dashboard() {
                                                 <a href="" className="avatar avatar-xs rounded-circle"
                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                    title="Romina Hadid">
-                                                    <img src="../assets/img/team-3.jpg" alt="team8"/>
+                                                    <img src="./assets/img/team-3.jpg" alt="team8"/>
                                                 </a>
                                                 <a href="" className="avatar avatar-xs rounded-circle"
                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                    title="Jessica Doe">
-                                                    <img src="../assets/img/team-1.jpg" alt="team9"/>
+                                                    <img src="./assets/img/team-1.jpg" alt="team9"/>
                                                 </a>
                                             </div>
                                         </td>
@@ -646,7 +646,7 @@ export default function Dashboard() {
                                         <td>
                                             <div className="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="../assets/img/small-logos/logo-spotify.svg"
+                                                    <img src="./assets/img/small-logos/logo-spotify.svg"
                                                          className="avatar avatar-sm me-3" alt="spotify"/>
                                                 </div>
                                                 <div className="d-flex flex-column justify-content-center">
@@ -659,22 +659,22 @@ export default function Dashboard() {
                                                 <a href="" className="avatar avatar-xs rounded-circle"
                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                    title="Ryan Tompson">
-                                                    <img src="../assets/img/team-4.jpg" alt="user1"/>
+                                                    <img src="./assets/img/team-4.jpg" alt="user1"/>
                                                 </a>
                                                 <a href="" className="avatar avatar-xs rounded-circle"
                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                    title="Romina Hadid">
-                                                    <img src="../assets/img/team-3.jpg" alt="user2"/>
+                                                    <img src="./assets/img/team-3.jpg" alt="user2"/>
                                                 </a>
                                                 <a href="" className="avatar avatar-xs rounded-circle"
                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                    title="Alexander Smith">
-                                                    <img src="../assets/img/team-4.jpg" alt="user3"/>
+                                                    <img src="./assets/img/team-4.jpg" alt="user3"/>
                                                 </a>
                                                 <a href="" className="avatar avatar-xs rounded-circle"
                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                    title="Jessica Doe">
-                                                    <img src="../assets/img/team-1.jpg" alt="user4"/>
+                                                    <img src="./assets/img/team-1.jpg" alt="user4"/>
                                                 </a>
                                             </div>
                                         </td>
@@ -700,7 +700,7 @@ export default function Dashboard() {
                                         <td>
                                             <div className="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="../assets/img/small-logos/logo-jira.svg"
+                                                    <img src="./assets/img/small-logos/logo-jira.svg"
                                                          className="avatar avatar-sm me-3" alt="jira"/>
                                                 </div>
                                                 <div className="d-flex flex-column justify-content-center">
@@ -713,7 +713,7 @@ export default function Dashboard() {
                                                 <a href="" className="avatar avatar-xs rounded-circle"
                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                    title="Ryan Tompson">
-                                                    <img src="../assets/img/team-4.jpg" alt="user5"/>
+                                                    <img src="./assets/img/team-4.jpg" alt="user5"/>
                                                 </a>
                                             </div>
                                         </td>
@@ -739,7 +739,7 @@ export default function Dashboard() {
                                         <td>
                                             <div className="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="../assets/img/small-logos/logo-invision.svg"
+                                                    <img src="./assets/img/small-logos/logo-invision.svg"
                                                          className="avatar avatar-sm me-3" alt="invision"/>
                                                 </div>
                                                 <div className="d-flex flex-column justify-content-center">
@@ -752,12 +752,12 @@ export default function Dashboard() {
                                                 <a href="" className="avatar avatar-xs rounded-circle"
                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                    title="Ryan Tompson">
-                                                    <img src="../assets/img/team-1.jpg" alt="user6"/>
+                                                    <img src="./assets/img/team-1.jpg" alt="user6"/>
                                                 </a>
                                                 <a href="" className="avatar avatar-xs rounded-circle"
                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                    title="Jessica Doe">
-                                                    <img src="../assets/img/team-4.jpg" alt="user7"/>
+                                                    <img src="./assets/img/team-4.jpg" alt="user7"/>
                                                 </a>
                                             </div>
                                         </td>

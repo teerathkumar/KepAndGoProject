@@ -1,7 +1,7 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
-// import logo from '../../../assets/img/logo-ct.png';
+// import logo from '../.././assets/img/logo-ct.png';
 
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import {Link, usePage} from '@inertiajs/react';
