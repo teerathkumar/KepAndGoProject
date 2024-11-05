@@ -101,10 +101,10 @@ export default function (props) {
                                         </td>
 
                                         <td className="ps-4">
-                                            <p className="text-xs font-weight-bold mb-0">{val.lead_id}</p>
+                                            <p className="text-xs font-weight-bold mb-0">{val.lead.name}</p>
                                         </td>
                                         <td className="ps-4">
-                                            <p className="text-xs font-weight-bold mb-0">{val.user_id}</p>
+                                            <p className="text-xs font-weight-bold mb-0">{val.user.name}</p>
                                         </td>
                                         <td className="align-middle text-sm">
                                             <span className="badge badge-sm bg-gradient-success">Online</span>
