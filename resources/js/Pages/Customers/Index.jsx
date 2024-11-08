@@ -119,9 +119,22 @@ export default function Dashboard(props) {
                                             <td>
                                                 <Link
 
-                                                    tabIndex="1"
+                                                    tabIndex="2"
 
                                                     className="mx-3"
+                                                    data-bs-toggle="tooltip"
+                                                    data-bs-original-title="Edit user"
+
+                                                    href={route("documents.gallery", [val.id])}
+
+                                                >
+                                                    <i className="fa fa-folder-open	 text-secondary"></i>
+                                                </Link>
+                                                <Link
+
+                                                    tabIndex="1"
+
+                                                    className="me-3"
                                                     data-bs-toggle="tooltip"
                                                     data-bs-original-title="Edit user"
 
