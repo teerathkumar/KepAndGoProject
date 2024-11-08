@@ -107,6 +107,13 @@ class DocumentsController extends Controller
         return response()->json(['success'=>'true']);
 
     }
+    function downloadfile($id)
+    {
+        $document = CustomerDocument::where('id',$id)->pluck('file_path')->first();
+        $file = public_path()."/".$document;
+//        dd($file);
+        return response()->download($file);
+    }
     public function store(Request $request)
 
     {

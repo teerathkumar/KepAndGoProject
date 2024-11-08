@@ -49,6 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('documents/create/{id}', [DocumentsController::class, 'create'])->name('documents.create');
     Route::post('documents/createfile', [DocumentsController::class, 'createfile'])->name('documents.createfile');
     Route::post('documents/store', [DocumentsController::class, 'store'])->name('documents.store');
+    Route::get('documents/download/{id}', [DocumentsController::class, 'downloadfile'])->name('documents.download');
 
     Route::get('/logout', [SessionsController::class, 'destroy']);
     Route::get('/user-profile', [InfoUserController::class, 'create']);

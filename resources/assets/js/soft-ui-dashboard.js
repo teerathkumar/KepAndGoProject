@@ -643,6 +643,7 @@ let body = document.getElementsByTagName('body')[0];
 let className = 'g-sidenav-pinned';
 
 if (iconNavbarSidenav) {
+    alert("Hi its me");
   iconNavbarSidenav.addEventListener("click", toggleSidenav);
 }
 
