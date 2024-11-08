@@ -9,6 +9,7 @@ use App\Http\Controllers\OfficesController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\TicketsController;
+use App\Http\Controllers\DocumentsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -21,6 +22,7 @@ Route::resource('customers', CustomersController::class)->middleware(['auth', 'v
 Route::resource('services', ServicesController::class)->middleware(['auth', 'verified']);
 Route::resource('tickets', TicketsController::class)->middleware(['auth', 'verified']);
 Route::resource('users', InfoUserController::class)->middleware(['auth', 'verified']);
+//Route::resource('documents', DocumentsController::class)->middleware(['auth', 'verified']);
 
 
 Route::get('/', function () {
@@ -39,6 +41,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', function () {
         return Inertia::render('Dashboard');
     });
+
+    Route::get('documents/gallery/{id}', [DocumentsController::class, 'gallery'])->name('documents.gallery');
+    Route::get('documents/gallery/files/{id}', [DocumentsController::class, 'files'])->name('documents.gallery.files');
+    Route::get('documents/gallery/files/create/{id}', [DocumentsController::class, 'createfile'])->name('documents.gallery.files.create');
+    Route::get('documents/getfiles/{id}', [DocumentsController::class, 'getfiles'])->name('documents.getfiles');
+    Route::get('documents/create/{id}', [DocumentsController::class, 'create'])->name('documents.create');
+    Route::post('documents/createfile', [DocumentsController::class, 'createfile'])->name('documents.createfile');
+    Route::post('documents/store', [DocumentsController::class, 'store'])->name('documents.store');
+
     Route::get('/logout', [SessionsController::class, 'destroy']);
     Route::get('/user-profile', [InfoUserController::class, 'create']);
     Route::post('/user-profile', [InfoUserController::class, 'store']);

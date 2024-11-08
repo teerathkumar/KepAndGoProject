@@ -7,6 +7,7 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/js/app.jsx',
+                'resources/assets/css/custom.css',
                 'resources/assets/css/nucleo-icons.css',
                 'resources/assets/css/nucleo-svg.css',
                 'resources/assets/css/soft-ui-dashboard.css',

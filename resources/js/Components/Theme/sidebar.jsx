@@ -132,7 +132,7 @@ export default function Sidebar(props) {
                     </li>
                     <li className="nav-item">
                         <NavLink href={route('customers.index')}
-                                 active={route().current('customers.index') || route().current('customers.create') || route().current('customers.edit')}>
+                                 active={route().current('documents.gallery') || route().current('customers.index') || route().current('customers.create') || route().current('customers.edit')}>
                             {/*<a className="nav-link {{ (Request::is('Leads') ? 'active' : '') }} " href="{{ url('Leads') }}">*/}
                             <div
                                 className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -196,7 +196,8 @@ export default function Sidebar(props) {
                         <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
                     </li>
                     <li className="nav-item">
-                        <NavLink href={route('offices.index')} active={route().current('offices.index') || route().current('offices.create') || route().current('offices.edit')}>
+                        <NavLink href={route('offices.index')}
+                                 active={route().current('offices.index') || route().current('offices.create') || route().current('offices.edit')}>
                             {/*<a className="nav-link {{ (Request::is('user-profile') ? 'active' : '') }} " href="{{ url('user-profile') }}">*/}
                             <div
                                 className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -233,7 +234,8 @@ export default function Sidebar(props) {
                         </NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink href={route('profiles.index')} active={route().current('profiles.index') || route().current('profiles.create') || route().current('profiles.edit')}>
+                        <NavLink href={route('profiles.index')}
+                                 active={route().current('profiles.index') || route().current('profiles.create') || route().current('profiles.edit')}>
                             {/*<a className="nav-link {{ (Request::is('user-profile') ? 'active' : '') }} " href="{{ url('user-profile') }}">*/}
                             <div
                                 className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
