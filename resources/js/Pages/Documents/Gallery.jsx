@@ -10,7 +10,7 @@ import {Head, usePage, Link, useForm} from '@inertiajs/react';
 import Modal from '@/Components/Modal.jsx';
 
 export default function (props) {
-
+    const base_url = import.meta.env.VITE_API_URL;
     const {documents, customer_id} = usePage().props
 
     function destroy(e) {
@@ -41,9 +41,9 @@ export default function (props) {
         }
     }
 
-    function hello(id,e=null) {
+    function hello(id, e = null) {
         // console.log(id);
-        if(e!=null){
+        if (e != null) {
             e.preventDefault();
         }
         // setSele
@@ -65,25 +65,27 @@ export default function (props) {
             });
     }
 
-    const [file_name, setFileName]=useState();
-    const [file_desc, setFileDesc]=useState();
-    const [uploadfile,setUploadFile]=useState(null);
-    const [errors, setErrors]=useState([]);
+    const [file_name, setFileName] = useState();
+    const [file_desc, setFileDesc] = useState();
+    const [uploadfile, setUploadFile] = useState(null);
+    const [errors, setErrors] = useState([]);
     useEffect(() => {
         console.log("File has been set.")
-    },[uploadfile]);
-    function setData(key, value){
-        if(key=="file_name")
+    }, [uploadfile]);
+
+    function setData(key, value) {
+        if (key == "file_name")
             setFileName(value);
-        if(key=="file_desc")
+        if (key == "file_desc")
             setFileDesc(value);
-        if(key=="uploadFile"){
+        if (key == "uploadFile") {
             // event.currentTarget.files[0]
             setUploadFile(value.target.files[0]);
             // event.target.files[0];
         }
 
     }
+
     function handleSubmit(e) {
         // console.log(id);
         e.preventDefault();
@@ -103,7 +105,7 @@ export default function (props) {
             .then(function (response) {
                 //handle success
                 console.log(response);
-                if(response.status==200){
+                if (response.status == 200) {
                     $("#exampleModal").modal('toggle');//.fadeOut();
                     hello(selectedFolder);
                 } else {
@@ -115,7 +117,33 @@ export default function (props) {
                 console.log(response);
             });
     }
+    const [showImage, setShowImage] = useState();
+    function fnShowImage(val){
+        setShowImage(val);
+        $("#imageViewerModal").modal('toggle');
+    }
 
+    function downloadFile(id, file_name, file_type){
+        axios({
+            url: '/documents/download/'+id, //your url
+            method: 'GET',
+            responseType: 'blob', // important
+        }).then((response) => {
+            // create file link in browser's memory
+            const href = URL.createObjectURL(response.data);
+
+            // create "a" HTML element with href to file & click
+            const link = document.createElement('a');
+            link.href = href;
+            link.setAttribute('download', file_name+"."+file_type); //or any other extension
+            document.body.appendChild(link);
+            link.click();
+
+            // clean up "a" element & remove ObjectURL
+            document.body.removeChild(link);
+            URL.revokeObjectURL(href);
+        });
+    }
 
     return (
 
@@ -129,6 +157,16 @@ export default function (props) {
 
         >
             <Head title="Documents"/>
+            <div className="modal fade" id="imageViewerModal" tabIndex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <img src={showImage} className="img-fluid" alt="Responsive image"/>
+                    </div>
+                </div>
+            </div>
+
+
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
                 <div className="modal-dialog">
@@ -142,63 +180,64 @@ export default function (props) {
                             <div className="modal-body">
                                 <div className="col-12">
 
-                                            <div className="flex flex-col">
+                                    <div className="flex flex-col">
 
-                                                <div className="mb-2">
-                                                    <label className="">File Name</label>
-                                                    <input
-                                                        type="text"
-                                                        className="w-full rounded"
-                                                        label="Name"
-                                                        name="file_name"
-                                                        value={file_name}
-                                                        onChange={(e) =>
-                                                            setData("file_name",e.target.value)
-                                                        }
-                                                    />
-                                                    <span className="text-red-600">
+                                        <div className="mb-2">
+                                            <label className="">File Name</label>
+                                            <input
+                                                type="text"
+                                                className="w-full rounded"
+                                                label="Name"
+                                                name="file_name"
+                                                value={file_name}
+                                                onChange={(e) =>
+                                                    setData("file_name", e.target.value)
+                                                }
+                                            />
+                                            <span className="text-red-600">
                                             {errors.file_name}
                                         </span>
-                                                </div>
-                                                <div className="mb-2">
-                                                    <label className="">Description</label>
-                                                    <input
-                                                        type="text"
-                                                        className="w-full rounded"
-                                                        label="Description"
-                                                        name="description"
-                                                        value={file_desc}
-                                                        onChange={(e) =>
+                                        </div>
+                                        <div className="mb-2">
+                                            <label className="">Description</label>
+                                            <input
+                                                type="text"
+                                                className="w-full rounded"
+                                                label="Description"
+                                                name="description"
+                                                value={file_desc}
+                                                onChange={(e) =>
 
-                                                            setData("file_desc",e.target.value)
-                                                        }
-                                                    />
-                                                    <span className="text-red-600">
+                                                    setData("file_desc", e.target.value)
+                                                }
+                                            />
+                                            <span className="text-red-600">
                                             {errors.description}
                                         </span>
-                                                </div>
-                                                <div className="mb-2">
-                                                    <label className="">File Upload</label>
-                                                    <input
-                                                        type="file"
-                                                        className="w-full rounded"
-                                                        label="File"
-                                                        name="file"
-                                                        onChange={(e) =>
-                                                            // setData("uploadFile",e)
-                                                            setUploadFile(e.target.files[0])
-                                                        }
-                                                    />
-                                                    <span className="text-red-600">
+                                        </div>
+                                        <div className="mb-2">
+                                            <label className="">File Upload</label>
+                                            <input
+                                                type="file"
+                                                className="w-full rounded"
+                                                label="File"
+                                                name="file"
+                                                onChange={(e) =>
+                                                    // setData("uploadFile",e)
+                                                    setUploadFile(e.target.files[0])
+                                                }
+                                            />
+                                            <span className="text-red-600">
                                             {errors.description}
                                         </span>
-                                                </div>
-                                            </div>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close
+                                <button type="button" className="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close
                                 </button>
                                 <button type="submit" className="btn btn-primary">Save</button>
                             </div>
@@ -220,7 +259,8 @@ export default function (props) {
                                                 <input type="text"
                                                        className="form-control bg-light border-light rounded"
                                                        placeholder="Search..."/>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="26"
+                                                     height="26"
                                                      viewBox="0 0 24 24"
                                                      className="eva eva-search-outline search-icon">
                                                     <g data-name="Layer 2">
@@ -235,7 +275,8 @@ export default function (props) {
                                         </div>
                                     </div>
                                     <div className="col-lg-8 col-sm-6">
-                                        <div className="mt-4 mt-sm-0 d-flex align-items-center justify-content-sm-end">
+                                        <div
+                                            className="mt-4 mt-sm-0 d-flex align-items-center justify-content-sm-end">
                                             <div className="mb-2 me-2">
                                                 <Link
                                                     className="mb-0 me-2"
@@ -265,17 +306,20 @@ export default function (props) {
                                                                     <i className="bx bxs-folder h1 mb-0 text-primary icon-global"
                                                                        id={"icon-" + val.id}></i>
                                                                 </div>
-                                                                <div className="align-self-start float-right">
+                                                                <div
+                                                                    className="align-self-start float-right">
                                                                     <div className="dropdown">
                                                                         <button
                                                                             className="dropdown-toggle"
-                                                                            type="button" data-bs-toggle="dropdown"
+                                                                            type="button"
+                                                                            data-bs-toggle="dropdown"
                                                                             aria-expanded="false">
                                                                         </button>
                                                                         <ul className="dropdown-menu">
                                                                             <li>
-                                                                                <button className="dropdown-item"
-                                                                                        type="button">Delete
+                                                                                <button
+                                                                                    className="dropdown-item"
+                                                                                    type="button">Delete
                                                                                 </button>
                                                                             </li>
                                                                         </ul>
@@ -323,14 +367,15 @@ export default function (props) {
 
                                     <div className="row">
                                         <div className="col-lg-4 col-sm-6 mt-3">
-                                        <h2>Folder: <strong>{files.file_name}</strong></h2>
+                                            <h2>Folder: <strong>{files.file_name}</strong></h2>
                                         </div>
                                         <div className="col-lg-8 col-sm-6">
                                             <div
                                                 className="mt-4 mt-sm-0 d-flex align-items-center justify-content-sm-end">
                                                 <div className="me-2">
                                                     <button type="button"
-                                                            data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#exampleModal">
                                                         <i className='bx bxs-file-plus h1 text-indigo'></i>
                                                     </button>
                                                 </div>
@@ -353,8 +398,23 @@ export default function (props) {
                                                                     className="d-flex justify-content-between align-items-start">
                                                                     <div style={{fontSize: "48px"}}>
                                                                         {/*<i className="bx bxs-file-pdf h1 mb-0 text-secondary"></i>*/}
+                                                                        {
+                                                                            val.file_type == "jpg" || val.file_type == "png" || val.file_type == "gif" ? (
 
-                                                                        <i className={'bx text-indigo ' + getIcon(val.file_type)}></i>
+                                                                                    <img
+                                                                                        onClick={()=>fnShowImage(base_url+"/"+val.file_path)}
+                                                                                        src={`${base_url}/${val.file_path}`}
+                                                                                        className="rounded mx-auto d-block max-h-20 max-w-20 img-thumbnail" style={{cursor:"pointer"}}
+                                                                                        id={"logo"}
+                                                                                        alt="..."/>
+
+
+                                                                            ) : (
+                                                                                <i className={'logo bx text-indigo ' + getIcon(val.file_type)}></i>
+                                                                            )
+                                                                        }
+
+
                                                                     </div>
                                                                     {/*<div className="align-self-start float-right">*/}
                                                                     {/*    <i className="fa fa-ellipsis-vertical text-danger me-1"></i>*/}
@@ -362,34 +422,41 @@ export default function (props) {
                                                                     <div className="dropdown">
                                                                         <button
                                                                             className="dropdown-toggle"
-                                                                            type="button" data-bs-toggle="dropdown"
+                                                                            type="button"
+                                                                            data-bs-toggle="dropdown"
                                                                             aria-expanded="false">
                                                                         </button>
                                                                         <ul className="dropdown-menu">
                                                                             <li>
-                                                                                <button className="dropdown-item"
-                                                                                        type="button">View
+                                                                                <button
+                                                                                    className="dropdown-item"
+                                                                                    type="button">View
                                                                                 </button>
                                                                             </li>
                                                                             <li>
-                                                                                <button className="dropdown-item"
-                                                                                        type="button">Remove
+                                                                                <button
+                                                                                    className="dropdown-item"
+                                                                                    type="button">Remove
                                                                                 </button>
                                                                             </li>
                                                                             <li>
-                                                                                <button className="dropdown-item"
-                                                                                        type="button">Download
+                                                                                <button
+                                                                                    className="dropdown-item"
+                                                                                    onClick={()=>downloadFile(val.id, val.file_name, val.file_type)}
+                                                                                    type="button">Download
                                                                                 </button>
                                                                             </li>
                                                                         </ul>
                                                                     </div>
 
                                                                 </div>
-                                                                <div className="d-flex mt-1 ml-2">
-                                                                    <div className="overflow-hidden me-auto">
-                                                                        <h5 className="font-size-15 text-truncate"><a
-                                                                            href="javascript: void(0);"
-                                                                            className="text-body">{val.file_name}</a>
+                                                                <div className="d-flex mt-1">
+                                                                    <div
+                                                                        className="overflow-hidden me-auto">
+                                                                        <h5 className="font-size-15 text-truncate">
+                                                                            <a
+                                                                                href="javascript: void(0);"
+                                                                                className="text-body">{val.file_name}</a>
                                                                         </h5>
                                                                     </div>
 
@@ -406,7 +473,8 @@ export default function (props) {
 
                                             <div className="col-xl-12 col-sm-6 text-center">
 
-                                                <p className="text-xs font-weight-bold mb-0">No files found.</p>
+                                                <p className="text-xs font-weight-bold mb-0">No files
+                                                    found.</p>
                                             </div>
 
                                         )}

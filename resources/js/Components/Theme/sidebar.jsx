@@ -10,6 +10,8 @@ import {FaChartBar} from 'react-icons/fa';
 
 
 export default function Sidebar(props) {
+    // const base_url = process.env.VITE_API_URL;
+    const base_url = import.meta.env.VITE_API_URL;
     return (
 
         <aside
@@ -20,7 +22,7 @@ export default function Sidebar(props) {
                    aria-hidden="true" id="iconSidenav"></i>
                 <NavLink className="align-items-center d-flex m-0 navbar-brand text-wrap" href={route('dashboard')}>
 
-                    <img src="./assets/img/logo-ct.png" className="navbar-brand-img h-100"
+                    <img src={`${base_url}/assets/img/logo-ct.png`} className="navbar-brand-img h-100"
                          alt="..."/>
                     <span className="ms-3 font-weight-bold">Kep & Go</span>
                 </NavLink>
