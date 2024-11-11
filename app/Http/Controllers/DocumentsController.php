@@ -13,7 +13,18 @@ class DocumentsController extends Controller
 {
     //
 
-    public function gallery($id)
+    public function search($id, $keyword=null){
+        $customerDocuments = Customer::where(['id'=>$id])->with([
+            'documents' => function ($myWithQuery) use ($keyword) {
+                $myWithQuery->where('parent_id', '0');
+                if($keyword && $keyword!=""){
+                    $myWithQuery->where('file_name', 'like', '%'.$keyword.'%');
+                }
+            }
+        ])->first();
+        return response()->json($customerDocuments);
+    }
+    public function gallery($id, $keyword=null)
 
     {
 
@@ -21,7 +32,7 @@ class DocumentsController extends Controller
 
 //        $customerDocuments = Customer::where(['id'=>$id])->with('documents')->first();
         $customerDocuments = Customer::where(['id'=>$id])->with([
-            'documents' => function ($myWithQuery) {
+            'documents' => function ($myWithQuery) use ($keyword) {
                 $myWithQuery->where('parent_id', '0');
             }
         ])->first();

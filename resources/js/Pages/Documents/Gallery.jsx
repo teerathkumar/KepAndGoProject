@@ -11,8 +11,25 @@ import Modal from '@/Components/Modal.jsx';
 
 export default function (props) {
     const base_url = import.meta.env.VITE_API_URL;
-    const {documents, customer_id} = usePage().props
+    const {documents: initialDocuments, customer_id} = usePage().props
 
+    const [documents, setDocuments] = useState(initialDocuments); // Initialize state with menus
+    function searchData(val){
+        axios.get(`/documents/search/${customer_id}/${val}`)
+            .then(response => {
+                console.log(response.data);
+                setDocuments(response.data);
+                $(".icon-global").addClass("bxs-folder").removeClass("bxs-folder-open");
+                setFiles([])
+                // setFiles(response.data);
+                // setSelectedFolder(id);
+                // Handle the response data here
+            })
+            .catch(error => {
+                console.error(error);
+                // Handle any errors here
+            });
+    }
     function destroy(e) {
 
         if (confirm("Are you sure you want to delete this document?")) {
@@ -31,7 +48,12 @@ export default function (props) {
             case "pdf":
                 return "bxs-file-pdf";
             case "doc":
+            case "docx":
                 return "bxs-file-doc";
+            case "xls":
+            case "xlxs":
+            case "csv":
+                return "bxs-spreadsheet";
             case "jpg":
             case "gif":
             case "png":
@@ -161,7 +183,8 @@ export default function (props) {
                  aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
-                        <img src={showImage} className="img-fluid" alt="Responsive image"/>
+                        {/*<img src={showImage} className="img-fluid" alt="Responsive image"/>*/}
+                        <embed src={showImage} alt="Responsive image" />
                     </div>
                 </div>
             </div>
@@ -257,6 +280,7 @@ export default function (props) {
                                         <div className="search-box mb-2 me-2">
                                             <div className="position-relative">
                                                 <input type="text"
+                                                       onChange={(e)=>searchData(e.target.value)}
                                                        className="form-control bg-light border-light rounded"
                                                        placeholder="Search..."/>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="26"
@@ -410,7 +434,7 @@ export default function (props) {
 
 
                                                                             ) : (
-                                                                                <i className={'logo bx text-indigo ' + getIcon(val.file_type)}></i>
+                                                                                <i onClick={()=>fnShowImage(base_url+"/"+val.file_path)} className={'logo bx text-indigo ' + getIcon(val.file_type)}></i>
                                                                             )
                                                                         }
 
