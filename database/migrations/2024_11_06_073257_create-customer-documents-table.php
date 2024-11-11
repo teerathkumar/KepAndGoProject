@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('customer_documents', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('customer_id');
-            $table->foreign('customer_id')->references('id')->on('customers');
+//            $table->foreign('customer_idr_id')->references('id')->on('customers');
             $table->tinyText('file_name');
             $table->text('description')->nullable();
             $table->tinyText('file_type')->nullable();
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->boolean('is_folder')->default(0);
             $table->smallInteger('parent_id')->default(0);
             $table->integer('creator_id');
-            $table->foreign('creator_id')->references('id')->on('users');
+//            $table->foreign('creator_id')->references('id')->on('users');
             $table->boolean('is_favorite')->default(0);
             $table->timestamps();
 
