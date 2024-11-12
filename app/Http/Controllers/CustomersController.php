@@ -15,7 +15,15 @@ class CustomersController extends Controller
      *
      * @return Response
      */
+    public function search($keyword=null){
+        $customers = Customer::query();
 
+        if($keyword && $keyword!="null" && $keyword!==null){
+            $customers->where('name', 'LIKE', "%$keyword%");
+        }
+        $customers = $customers->get();
+        return response()->json($customers);
+    }
     public function index()
 
     {

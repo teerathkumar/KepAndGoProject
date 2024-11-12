@@ -110,9 +110,22 @@ export default function (props) {
                                             <span className="badge badge-sm bg-gradient-success">Online</span>
                                         </td>
                                         <td className="text-sm">
-                                            <p className="text-xs font-weight-bold mb-0">{moment().format('LLLL')}</p>
+                                            <p className="text-xs font-weight-bold mb-0">{moment(val.created_at).format("DD MMM YYYY")}</p>
                                         </td>
                                         <td>
+
+                                            <Link
+
+                                                tabIndex="1"
+                                                className="mb-0"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-original-title="Edit user"
+
+                                                href={route("tickets.chat", val.id)}
+
+                                            >
+                                                <i className="fab fa-whatsapp-square" style={{fontSize:"20px",color:"#007C02"}}></i>
+                                            </Link>
                                             <Link
 
                                                 tabIndex="1"

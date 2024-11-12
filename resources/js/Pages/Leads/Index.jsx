@@ -6,8 +6,9 @@ import Authenticated from '@/Layouts/AuthenticatedLayout.jsx'
 
 import {Inertia} from "@inertiajs/inertia";
 import Modal from "@/Components/Modal.jsx";
-
 import {Head, usePage, Link} from '@inertiajs/react';
+import moment from "moment";
+
 
 export default function (props) {
 
@@ -119,7 +120,7 @@ export default function (props) {
                                             <span className="badge badge-sm bg-gradient-success">Online</span>
                                         </td>
                                         <td className="align-middle text-center text-sm">
-                                            <p className="text-xs font-weight-bold mb-0">{val.created_at}</p>
+                                            <p className="text-xs font-weight-bold mb-0">{moment(val.created_at).format("DD MMM YYYY")}</p>
                                         </td>
                                         <td>
                                             <Link

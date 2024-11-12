@@ -51,6 +51,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('documents/store', [DocumentsController::class, 'store'])->name('documents.store');
     Route::get('documents/download/{id}', [DocumentsController::class, 'downloadfile'])->name('documents.download');
     Route::get('documents/search/{id}/{keyword?}', [DocumentsController::class, 'search'])->name('documents.search');
+    Route::get('customers/search/{keyword?}', [CustomersController::class, 'search'])->name('customers.search');
+    Route::get('tickets/chat/{id}', [TicketsController::class, 'chat'])->name('tickets.chat');
 
     Route::get('/logout', [SessionsController::class, 'destroy']);
     Route::get('/user-profile', [InfoUserController::class, 'create']);

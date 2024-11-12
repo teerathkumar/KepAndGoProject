@@ -22,6 +22,11 @@ class TicketsController extends Controller
 
     }
 
+    public function chat($id){
+        $ticket = Ticket::with('lead.customer','user')->find($id)->toArray();
+//        dd($ticket);
+        return Inertia::render('Tickets/Chat', ['ticket' => $ticket]);
+    }
 
     /**
      * Write code on Method

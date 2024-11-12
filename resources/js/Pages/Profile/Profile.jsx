@@ -13,6 +13,7 @@ import { Inertia } from "@inertiajs/inertia";
 import {Head, usePage, Link, useForm} from '@inertiajs/react';
 export default function (props) {
     const { profileinfo } = usePage().props
+    const base_url = import.meta.env.VITE_API_URL;
 
     const { data, setData, put, errors } = useForm({
 
@@ -48,8 +49,15 @@ export default function (props) {
                             <div className="row gx-4">
                                 <div className="col-auto">
                                     <div className="avatar avatar-xl position-relative">
-                                        <img src="./assets/img/bruce-mars.jpg" alt="..."
-                                             className="w-100 border-radius-lg shadow-sm"/>
+                                        {
+                                            profileinfo.photo !== null ?
+                                                <img src={base_url + "/" + profileinfo.photo}
+                                                     className="w-100 border-radius-lg shadow-sm"/>
+                                                :
+                                            <img src={base_url + "/assets/img/bruce-mars.jpg"}
+                                            className="w-100 border-radius-lg shadow-sm"/>
+                                        }
+
                                         <a href="javascript:;"
                                            className="btn btn-sm btn-icon-only bg-gradient-light position-absolute bottom-0 end-0 mb-n2 me-n2">
                                             <i className="fa fa-pen top-0" data-bs-toggle="tooltip"
@@ -165,10 +173,10 @@ export default function (props) {
                                                     {/*'Location')}}*/}
                                                 </label>
                                                 <div
-                                                    className="@error('user.location') border border-danger rounded-3 @enderror">
+                                                    className="border border-danger rounded-3">
                                                     <input className="form-control" type="text" placeholder="Location"
                                                            id="name" name="location"
-                                                           value="{{ auth()->user()->location }}"/>
+                                                           value={ profileinfo.location } />
                                                 </div>
                                             </div>
                                         </div>

@@ -20,6 +20,7 @@ export default function (props) {
                 console.log(response.data);
                 setDocuments(response.data);
                 $(".icon-global").addClass("bxs-folder").removeClass("bxs-folder-open");
+                $('.folder-name').children("a").removeClass('fw-bold text-decoration-underline');
                 setFiles([])
                 // setFiles(response.data);
                 // setSelectedFolder(id);
@@ -453,6 +454,7 @@ export default function (props) {
                                                                         <ul className="dropdown-menu">
                                                                             <li>
                                                                                 <button
+                                                                                    onClick={()=>fnShowImage(base_url+"/"+val.file_path)}
                                                                                     className="dropdown-item"
                                                                                     type="button">View
                                                                                 </button>

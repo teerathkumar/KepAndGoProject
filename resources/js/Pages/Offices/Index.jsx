@@ -5,7 +5,7 @@ import React, { useCallback, useState } from 'react';
 import Authenticated from '@/Layouts/AuthenticatedLayout.jsx'
 
 import { Inertia } from "@inertiajs/inertia";
-
+import moment  from "moment";
 
 import { Head, usePage, Link } from '@inertiajs/react';
 
@@ -101,7 +101,7 @@ export default function Dashboard(props) {
                                             </p>
                                         </td>
                                         <td className="align-middle text-center text-sm">
-                                            <p className="text-xs font-weight-bold mb-0">{val.created_at}</p>
+                                            <p className="text-xs font-weight-bold mb-0">{moment(val.created_at).format("DD MMM YYYY")}</p>
                                         </td>
                                         <td>
                                             <Link

@@ -5,14 +5,14 @@ import React, {useCallback, useState} from 'react';
 import Authenticated from '@/Layouts/AuthenticatedLayout.jsx'
 
 import {Inertia} from "@inertiajs/inertia";
-
+import moment from "moment";
 
 import {Head, usePage, Link} from '@inertiajs/react';
 
 export default function (props) {
 
     const {users} = usePage().props
-
+    const base_url = import.meta.env.VITE_API_URL;
     function destroy(e) {
 
         if (confirm("Are you sure you want to delete this user?")) {
@@ -45,8 +45,17 @@ export default function (props) {
                                 <div>
                                     <h5 className="mb-0">All Users</h5>
                                 </div>
-                                <a href="#" className="btn bg-gradient-primary btn-sm mb-0" type="button">+&nbsp; New
-                                    User</a>
+                                <Link
+
+                                    className="btn bg-gradient-primary btn-sm mb-0" type="button"
+
+                                    href={route("users.create")}
+
+                                >
+
+                                    +&nbsp; Create User
+
+                                </Link>
                             </div>
                         </div>
                         <div className="card-body px-0 pt-0 pb-2">
@@ -85,7 +94,15 @@ export default function (props) {
                                         </td>
                                         <td>
                                             <div>
-                                                <img src="./assets/img/team-2.jpg" className="avatar avatar-sm me-3"/>
+                                                {
+                                                    val.photo !== null ?
+                                                        <img src={base_url + "/" + val.photo}
+                                                             className="avatar avatar-sm me-3"/>
+                                                        :
+                                                        <img src={base_url + "/assets/img/team-2.jpg"}
+                                                             className="avatar avatar-sm me-3"/>
+                                                }
+
                                             </div>
                                         </td>
                                         <td className="text-center">
@@ -98,19 +115,44 @@ export default function (props) {
                                             <p className="text-xs font-weight-bold mb-0">Admin</p>
                                         </td>
                                         <td className="text-center">
-                                            <span className="text-secondary text-xs font-weight-bold">16/06/18</span>
+                                            <span className="text-secondary text-xs font-weight-bold">{moment(val.created_at).format("DD MMM YYYY")}</span>
                                         </td>
-                                        <td className="text-center">
-                                            <a href="#" className="mx-3" data-bs-toggle="tooltip"
-                                               data-bs-original-title="Edit user">
+                                        <td>
+                                            <Link
+
+                                                tabIndex="1"
+
+                                                className="mx-3"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-original-title="Edit user"
+
+                                                href={route("users.edit", val.id)}
+
+                                            >
                                                 <i className="fas fa-user-edit text-secondary"></i>
-                                            </a>
-                                            <span>
-                                            <i className="cursor-pointer fas fa-trash text-secondary"></i>
-                                        </span>
+                                            </Link>
+
+
+                                            <button
+
+                                                onClick={destroy}
+
+                                                id={val.id}
+
+                                                tabIndex="-1"
+
+                                                type="button"
+
+
+                                            >
+
+                                                <i className="cursor-pointer fas fa-trash text-secondary"></i>
+
+                                            </button>
+
                                         </td>
                                     </tr>
-                                        ))}
+                                    ))}
                                     </tbody>
                                 </table>
                             </div>
