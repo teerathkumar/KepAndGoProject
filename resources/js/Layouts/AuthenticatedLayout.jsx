@@ -8,7 +8,7 @@ import {Link, usePage} from '@inertiajs/react';
 import {useEffect, useState} from 'react';
 
 export default function AuthenticatedLayout({header, children}) {
-    const user = usePage().props.auth.user;
+    // const user = usePage().props.auth.user;
     const {message} = usePage().props
     useEffect(() => {
         hideMessage();

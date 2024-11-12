@@ -8,13 +8,14 @@ import {Inertia} from "@inertiajs/inertia";
 
 import {Head, usePage, Link, useForm} from '@inertiajs/react';
 import Modal from '@/Components/Modal.jsx';
+import ImageUploading from 'react-images-uploading';
 
 export default function (props) {
     const base_url = import.meta.env.VITE_API_URL;
     const {documents: initialDocuments, customer_id} = usePage().props
 
     const [documents, setDocuments] = useState(initialDocuments); // Initialize state with menus
-    function searchData(val){
+    function searchData(val) {
         axios.get(`/documents/search/${customer_id}/${val}`)
             .then(response => {
                 console.log(response.data);
@@ -31,6 +32,7 @@ export default function (props) {
                 // Handle any errors here
             });
     }
+
     function destroy(e) {
 
         if (confirm("Are you sure you want to delete this document?")) {
@@ -109,6 +111,8 @@ export default function (props) {
 
     }
 
+    const [uploadProgress, setUploadProgress] = useState(0);
+
     function handleSubmit(e) {
         // console.log(id);
         e.preventDefault();
@@ -124,7 +128,17 @@ export default function (props) {
             url: "/documents/createfile",
             data: bodyFormData,
             headers: {"Content-Type": "multipart/form-data"},
+            progress(progressEvent) {
+                console.log("progress uploading... ", progressEvent);
+            },
+            // New version
+            onUploadProgress(progressEvent) {
+                console.log("upload progress uploading... ", progressEvent);
+                const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                setUploadProgress(progress);
+            }
         })
+
             .then(function (response) {
                 //handle success
                 console.log(response);
@@ -140,15 +154,17 @@ export default function (props) {
                 console.log(response);
             });
     }
+
     const [showImage, setShowImage] = useState();
-    function fnShowImage(val){
+
+    function fnShowImage(val) {
         setShowImage(val);
         $("#imageViewerModal").modal('toggle');
     }
 
-    function downloadFile(id, file_name, file_type){
+    function downloadFile(id, file_name, file_type) {
         axios({
-            url: '/documents/download/'+id, //your url
+            url: '/documents/download/' + id, //your url
             method: 'GET',
             responseType: 'blob', // important
         }).then((response) => {
@@ -158,7 +174,7 @@ export default function (props) {
             // create "a" HTML element with href to file & click
             const link = document.createElement('a');
             link.href = href;
-            link.setAttribute('download', file_name+"."+file_type); //or any other extension
+            link.setAttribute('download', file_name + "." + file_type); //or any other extension
             document.body.appendChild(link);
             link.click();
 
@@ -185,7 +201,7 @@ export default function (props) {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         {/*<img src={showImage} className="img-fluid" alt="Responsive image"/>*/}
-                        <embed src={showImage} alt="Responsive image" />
+                        <embed src={showImage} alt="Responsive image"/>
                     </div>
                 </div>
             </div>
@@ -239,8 +255,10 @@ export default function (props) {
                                             {errors.description}
                                         </span>
                                         </div>
+
                                         <div className="mb-2">
                                             <label className="">File Upload</label>
+
                                             <input
                                                 type="file"
                                                 className="w-full rounded"
@@ -251,13 +269,24 @@ export default function (props) {
                                                     setUploadFile(e.target.files[0])
                                                 }
                                             />
-                                            <span className="text-red-600">
-                                            {errors.description}
-                                        </span>
+                                            <span className="text-red-600">{errors.description}</span>
+                                            <div className="col-12 mt-1">
+                                                {uploadProgress > 0 &&
+                                                    <div className="progress">
+                                                        <div className="progress-bar" role="progressbar"
+                                                             style={{width: uploadProgress + "%"}}
+                                                             aria-valuenow={uploadProgress} aria-valuemin="0"
+                                                             aria-valuemax="100">
+
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
                                         </div>
                                     </div>
 
                                 </div>
+
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary"
@@ -281,7 +310,7 @@ export default function (props) {
                                         <div className="search-box mb-2 me-2">
                                             <div className="position-relative">
                                                 <input type="text"
-                                                       onChange={(e)=>searchData(e.target.value)}
+                                                       onChange={(e) => searchData(e.target.value)}
                                                        className="form-control bg-light border-light rounded"
                                                        placeholder="Search..."/>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="26"
@@ -426,16 +455,18 @@ export default function (props) {
                                                                         {
                                                                             val.file_type == "jpg" || val.file_type == "png" || val.file_type == "gif" ? (
 
-                                                                                    <img
-                                                                                        onClick={()=>fnShowImage(base_url+"/"+val.file_path)}
-                                                                                        src={`${base_url}/${val.file_path}`}
-                                                                                        className="rounded mx-auto d-block max-h-20 max-w-20 img-thumbnail" style={{cursor:"pointer"}}
-                                                                                        id={"logo"}
-                                                                                        alt="..."/>
+                                                                                <img
+                                                                                    onClick={() => fnShowImage(base_url + "/" + val.file_path)}
+                                                                                    src={`${base_url}/${val.file_path}`}
+                                                                                    className="rounded mx-auto d-block max-h-20 max-w-20 img-thumbnail"
+                                                                                    style={{cursor: "pointer"}}
+                                                                                    id={"logo"}
+                                                                                    alt="..."/>
 
 
                                                                             ) : (
-                                                                                <i onClick={()=>fnShowImage(base_url+"/"+val.file_path)} className={'logo bx text-indigo ' + getIcon(val.file_type)}></i>
+                                                                                <i onClick={() => fnShowImage(base_url + "/" + val.file_path)}
+                                                                                   className={'logo bx text-indigo ' + getIcon(val.file_type)}></i>
                                                                             )
                                                                         }
 
@@ -454,7 +485,7 @@ export default function (props) {
                                                                         <ul className="dropdown-menu">
                                                                             <li>
                                                                                 <button
-                                                                                    onClick={()=>fnShowImage(base_url+"/"+val.file_path)}
+                                                                                    onClick={() => fnShowImage(base_url + "/" + val.file_path)}
                                                                                     className="dropdown-item"
                                                                                     type="button">View
                                                                                 </button>
@@ -468,7 +499,7 @@ export default function (props) {
                                                                             <li>
                                                                                 <button
                                                                                     className="dropdown-item"
-                                                                                    onClick={()=>downloadFile(val.id, val.file_name, val.file_type)}
+                                                                                    onClick={() => downloadFile(val.id, val.file_name, val.file_type)}
                                                                                     type="button">Download
                                                                                 </button>
                                                                             </li>

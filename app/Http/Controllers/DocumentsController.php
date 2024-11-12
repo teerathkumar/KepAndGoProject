@@ -89,7 +89,7 @@ class DocumentsController extends Controller
 
 //        echo "2";
         $file = request()->file('uploadfile');
-        $filename = "myfilenameishere_".time().".".$file->getClientOriginalExtension();
+        $filename = time().".".$file->getClientOriginalExtension();
         $path=$file->storeAs('uploads', $filename, 'public');
 //        echo $path = $file->store('uploads', 'public');
 
