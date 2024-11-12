@@ -20,7 +20,7 @@ export default function Dashboard(props) {
 
         e.preventDefault();
 
-        put(route("services.update", customer.id));
+        put(route("services.update", service.id));
 
     }
 

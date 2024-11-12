@@ -2,6 +2,7 @@
 import {FaFax, FaSearch} from "react-icons/fa";
 import NavLink from "@/Components/NavLink.jsx";
 export default function Navigation(props) {
+    const base_url = import.meta.env.VITE_API_URL;
     const replaceStr = (str)=>{
         if(str){
             const strcount = str.split('.').length;
@@ -76,7 +77,7 @@ export default function Navigation(props) {
                                     <a className="dropdown-item border-radius-md" >
                                         <div className="d-flex py-1">
                                             <div className="my-auto">
-                                                <img src="./assets/img/team-2.jpg" className="avatar avatar-sm  me-3 " />
+                                                <img src={`${base_url}/assets/img/team-2.jpg`} className="avatar avatar-sm  me-3 " />
                                             </div>
                                             <div className="d-flex flex-column justify-content-center">
                                                 <h6 className="text-sm font-weight-normal mb-1">
@@ -94,7 +95,7 @@ export default function Navigation(props) {
                                     <a className="dropdown-item border-radius-md" >
                                         <div className="d-flex py-1">
                                             <div className="my-auto">
-                                                <img src="./assets/img/small-logos/logo-spotify.svg" className="avatar avatar-sm bg-gradient-dark  me-3 " />
+                                                <img src={`${base_url}/assets/img/small-logos/logo-spotify.svg`} className="avatar avatar-sm bg-gradient-dark  me-3 " />
                                             </div>
                                             <div className="d-flex flex-column justify-content-center">
                                                 <h6 className="text-sm font-weight-normal mb-1">

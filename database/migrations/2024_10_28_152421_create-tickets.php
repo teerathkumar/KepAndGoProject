@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('lead_id');
             $table->integer('user_id');
             $table->string('status')->default('1');
+            $table->dateTime('close_date')->nullable();
             $table->timestamps();
         });
     }

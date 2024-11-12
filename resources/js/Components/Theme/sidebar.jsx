@@ -78,7 +78,7 @@ export default function Sidebar(props) {
                         {/*<NavLink className="nav-link" href={route('posts.index')} active={route().current('posts.index')}>*/}
                         {/*<NavLink active={route().current('dashboard')} href="{ url('dashboard') }">*/}
                         <NavLink href={route('tickets.index')}
-                                 active={route().current('tickets.index') || route().current('tickets.create') || route().current('tickets.edit')}>
+                                 active={route().current('tickets.chat') || route().current('tickets.index') || route().current('tickets.create') || route().current('tickets.edit')}>
                             {/*<a className="nav-link {{ (Request::is('posts') ? 'active' : '') }} " href="{route('posts.index')}">*/}
                             <div
                                 className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">

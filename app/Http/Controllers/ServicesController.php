@@ -54,7 +54,7 @@ class ServicesController extends Controller
         Service::create($request->all());
 
 
-        return redirect()->route('services.index');
+        return redirect()->route('services.index')->with('success', 'Service created successfully.');
 
     }
 
@@ -97,7 +97,7 @@ class ServicesController extends Controller
 
         Service::find($id)->update($request->all());
 
-        return redirect()->route('services.index');
+        return redirect()->route('services.index')->with('success', 'Service updated successfully.');
 
     }
 
@@ -111,6 +111,6 @@ class ServicesController extends Controller
     public function destroy($id)
     {
         Service::find($id)->delete();
-        return redirect()->route('services.index');
+        return redirect()->route('services.index')->with('success', 'Service deleted successfully.');
     }
 }
