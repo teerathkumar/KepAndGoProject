@@ -15,7 +15,7 @@ export default function Dashboard(props) {
         password:"",
         phone:"",
         location:"",
-        role:"",
+        roles:"",
         photo:"",
         password_confirmation:""
 
@@ -290,29 +290,29 @@ export default function Dashboard(props) {
 
                                     <label className="">Role</label>
 
-                                    <select className="w-full rounded" label="role"
+                                    <select className="w-full rounded select2" label="roles"
 
                                             name="role"
-
-                                            errors={errors.role}
+                                            multiple={"multiple"}
+                                            errors={errors.roles}
 
                                             onChange={(e) =>
 
-                                                setData("role", e.target.value)
+                                                setData("roles", e.target.value)
 
                                             }>
-                                        <option value="0">No Role</option>
+                                        <option value={""}>no role</option>
                                         {
-                                            ['Admin', 'User'].map((val, index) => {
+                                            roles.map((val, index) => {
                                                 return (
-                                                    <option key={index} value={index}>{val}</option>
+                                                    <option key={index} value={val.id}>{val.name}</option>
                                                 );
                                             })
                                         }
                                     </select>
                                     <span className="text-red-600">
 
-                                            {errors.role}
+                                            {errors.roles}
 
                                         </span>
 

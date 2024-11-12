@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Laravue\Models\Role;
 use App\Models\Office;
 use App\Models\User;
 use Geocoder\Location;
@@ -13,9 +12,16 @@ use Illuminate\Support\Facades\View;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use Spatie\Permission\Models\Role;
 class InfoUserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view user', ['only' => ['index']]);
+        $this->middleware('permission:create user', ['only' => ['create','store']]);
+        $this->middleware('permission:update user', ['only' => ['update','edit']]);
+        $this->middleware('permission:delete user', ['only' => ['destroy']]);
+    }
 
     public function index(){
         $users = User::all();
@@ -24,7 +30,8 @@ class InfoUserController extends Controller
     public function create()
     {
         $locations = Office::all();
-        return Inertia::render('Users/Create', ['locations'=>$locations]);
+        $roles = Role::all();
+        return Inertia::render('Users/Create', ['locations'=>$locations,'roles'=>$roles]);
     }
 
     public function store(Request $request)
@@ -58,7 +65,7 @@ class InfoUserController extends Controller
 
 //        dd($attributes);
 
-        User::create([
+        $user = User::create([
             'name' => $attributes['name'],
             'email' => $attributes['email'],
             'phone' => $attributes['phone'],
@@ -66,18 +73,22 @@ class InfoUserController extends Controller
             'password'=>Hash::make($attributes['password']),
             'photo' => $attributes['photo']
         ]);
+        $user->syncRoles($request->roles);
 
         return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
     public function edit(User $user)
 
     {
-
+        $roles = Role::pluck('name','name')->all();
+        $userRoles = $user->roles->pluck('name','name')->all();
         $locations = Office::all();
         return Inertia::render('Users/Edit', [
 
             'user' => $user,
             'locations'=>$locations,
+            'roles'=>$roles,
+            'userRoles'=>$userRoles,
 
         ]);
 
@@ -102,6 +113,7 @@ class InfoUserController extends Controller
 
         unset($attributes['role']);
         $user->update($attributes);
+        $user->syncRoles($request->roles);
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
 
