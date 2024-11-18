@@ -11,6 +11,13 @@ use Inertia\Inertia;
 
 class DocumentsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view document', ['only' => ['gallery']]);
+        $this->middleware('permission:create document', ['only' => ['create','store']]);
+        $this->middleware('permission:update document', ['only' => ['update','edit']]);
+        $this->middleware('permission:delete document', ['only' => ['destroy']]);
+    }
     //
 
     public function search($id, $keyword=null){

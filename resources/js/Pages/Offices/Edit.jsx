@@ -17,7 +17,7 @@ export default function Dashboard(props) {
 
         name: office.name || "",
 
-        parent_id: office.parent_id || "",
+        parent_id: office.parent_id || "0"
 
     });
 
@@ -70,8 +70,7 @@ export default function Dashboard(props) {
                         </div>
 
 
-                        <form name="createForm" onSubmit={handleSubmit}>
-
+                        <form name="createForm" onSubmit={handleSubmit} >
                             <div className="flex flex-col">
 
                                 <div className="mb-2">

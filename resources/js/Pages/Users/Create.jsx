@@ -15,7 +15,7 @@ export default function Dashboard(props) {
         password:"",
         phone:"",
         location:"",
-        roles:"",
+        role:"",
         photo:"",
         password_confirmation:""
 
@@ -293,12 +293,11 @@ export default function Dashboard(props) {
                                     <select className="w-full rounded select2" label="roles"
 
                                             name="role"
-                                            multiple={"multiple"}
-                                            errors={errors.roles}
+                                            errors={errors.role}
 
                                             onChange={(e) =>
 
-                                                setData("roles", e.target.value)
+                                                setData("role", e.target.value)
 
                                             }>
                                         <option value={""}>no role</option>
@@ -312,7 +311,7 @@ export default function Dashboard(props) {
                                     </select>
                                     <span className="text-red-600">
 
-                                            {errors.roles}
+                                            {errors.role}
 
                                         </span>
 

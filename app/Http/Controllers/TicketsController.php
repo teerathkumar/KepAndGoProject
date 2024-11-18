@@ -11,6 +11,14 @@ use Inertia\Inertia;
 
 class TicketsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view ticket', ['only' => ['index']]);
+        $this->middleware('permission:create ticket', ['only' => ['create','store']]);
+        $this->middleware('permission:update ticket', ['only' => ['update','edit']]);
+        $this->middleware('permission:delete ticket', ['only' => ['destroy']]);
+    }
+
     //
     public function index()
 
