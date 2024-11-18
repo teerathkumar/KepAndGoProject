@@ -23,7 +23,15 @@ Route::resource('services', ServicesController::class)->middleware(['auth', 'ver
 Route::resource('tickets', TicketsController::class)->middleware(['auth', 'verified']);
 Route::resource('users', InfoUserController::class)->middleware(['auth', 'verified']);
 //Route::resource('documents', DocumentsController::class)->middleware(['auth', 'verified']);
-
+//
+//Route::prefix("/offices")->middleware(['auth', 'verified'])->group(function () {
+//    Route::get('/', [OfficesController::class, 'index'])->name('offices.index');
+//    Route::get('/create', [OfficesController::class, 'create'])->name('offices.create');
+//    Route::post('/store', [OfficesController::class, 'store'])->name('offices.store');
+//    Route::get('/edit/{id}', [OfficesController::class, 'edit'])->name('offices.edit');
+//    Route::put('/update', [OfficesController::class, 'update'])->name('offices.update');
+//    Route::delete('/delete', [OfficesController::class, 'destroy'])->name('offices.delete');
+//});
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -37,8 +45,8 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-Route::group(['middleware' => ['role:super-admin|admin']], function() {
 
+Route::group(['middleware' => ['role:super-admin|admin']], function() {
     Route::resource('permissions', App\Http\Controllers\PermissionController::class);
     Route::get('permissions/{permissionId}/delete', [App\Http\Controllers\PermissionController::class, 'destroy']);
 
@@ -57,7 +65,7 @@ Route::group(['middleware' => 'auth'], function () {
         return Inertia::render('Dashboard');
     });
 
-    Route::get('documents/gallery/{id}', [DocumentsController::class, 'gallery'])->name('documents.gallery');
+    Route::get('documents/{id}', [DocumentsController::class, 'gallery'])->name('documents.gallery');
     Route::get('documents/gallery/files/{id}', [DocumentsController::class, 'files'])->name('documents.gallery.files');
     Route::get('documents/gallery/files/create/{id}', [DocumentsController::class, 'createfile'])->name('documents.gallery.files.create');
     Route::get('documents/getfiles/{id}', [DocumentsController::class, 'getfiles'])->name('documents.getfiles');

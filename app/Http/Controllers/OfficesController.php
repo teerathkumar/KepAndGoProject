@@ -6,9 +6,17 @@ use Illuminate\Http\Request;
 use App\Models\Office;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Exceptions\UnauthorizedException;
+
 
 class OfficesController extends Controller
 {
+    public function __construct(){
+        $this->middleware('permission:view office', ['only' => ['index']]);
+        $this->middleware('permission:create office', ['only' => ['create','store']]);
+        $this->middleware('permission:update office', ['only' => ['update','edit']]);
+        $this->middleware('permission:delete office', ['only' => ['destroy']]);
+    }
     //
     /**
      * Show the form for creating a new resource.
@@ -19,10 +27,15 @@ class OfficesController extends Controller
     public function index()
 
     {
+        try{
 
-        $offices = Office::with("parent")->get();
+            $offices = Office::with("parent")->get();
 
-        return Inertia::render('Offices/Index', ['offices' => $offices]);
+            return Inertia::render('Offices/Index', ['offices' => $offices]);
+        } catch (UnauthorizedException $exception) {
+            dd($exception->getMessage());
+        }
+
 
     }
 

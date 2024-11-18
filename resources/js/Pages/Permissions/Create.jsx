@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 
 import Authenticated from '@/Layouts/AuthenticatedLayout.jsx';
 
@@ -17,32 +17,27 @@ export default function Dashboard(props) {
     });
 
 
+    function handleSubmit(e) {
 
+        setData("permissions", selectedValues);
+        e.preventDefault();
+
+        post(route("roles.store"));
+
+    }
     const [selectedValues, setSelectedValues] = useState([]);
-
     const handleChange = (event) => {
         const {value, checked} = event.target;
         setSelectedValues(prevState => {
             if (checked) {
-                return [...prevState, parseInt(value)];
+                return [...prevState, value];
             } else {
-                return prevState.filter(val => val !== parseInt(value));
+                return prevState.filter(val => val !== value);
             }
         });
         console.log(selectedValues);
     }
 
-    useEffect(() => {
-        console.log(selectedValues);
-        setData("permissions", selectedValues);
-    }, [selectedValues]);
-    function handleSubmit(e) {
-        e.preventDefault();
-        // setData("permissions", selectedValues);
-        // setData(prevData => ({ ...prevData, permissions: selectedValues }));
-        post(route("roles.store"));
-
-    }
     return (
 
         <Authenticated
@@ -122,22 +117,28 @@ export default function Dashboard(props) {
 
                                 <div className="mb-2">
                                     <label htmlFor="">Permissions</label>
-                                    <div className="row checkbox-group">
-                                        {permissions.map((val, index) => (
-                                            <div className="col-md-3" key={index} style={{textTransform: "capitalize"}}>
-                                                <label className="px-2 cursor-pointer">
-                                                    <input
-                                                        className="mx-2 mychecboxes"
-                                                        type="checkbox"
-                                                        value={val.id}
-                                                        id={"checkbox-" + val.id}
-                                                        checked={selectedValues.includes(val.id)}
-                                                        onChange={handleChange}
-                                                    />
-                                                    {val.name}
-                                                </label>
-                                            </div>
-                                        ))}
+
+                                    <div className="row">
+
+                                        {
+                                            permissions.map((val, index) => (
+                                                <div className="col-md-3" key={index}
+                                                     style={{textTransform: "capitalize"}}>
+                                                    <label className="px-2 cursor-pointer">
+                                                        <input
+                                                            className="mx-2"
+                                                            type="checkbox"
+                                                            name={data.permissions}
+                                                            value={val.name}
+                                                            onChange={handleChange}
+
+                                                        />
+                                                        {val.name}
+                                                    </label>
+                                                </div>
+                                            ))
+                                        }
+
                                     </div>
                                 </div>
                             </div>

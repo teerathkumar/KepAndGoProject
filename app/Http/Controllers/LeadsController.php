@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Validator;
 
 class LeadsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view lead', ['only' => ['index']]);
+        $this->middleware('permission:create lead', ['only' => ['create','store']]);
+        $this->middleware('permission:update lead', ['only' => ['update','edit']]);
+        $this->middleware('permission:delete lead', ['only' => ['destroy']]);
+    }
+
     //
     public function  index()
     {

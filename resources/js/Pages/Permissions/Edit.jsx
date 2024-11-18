@@ -30,12 +30,16 @@ export default function Dashboard(props) {
 
     useEffect(() => {
         console.log(selectedValues);
-        setData("permissions", selectedValues);
     }, [selectedValues]);
 
     function handleSubmit(e) {
-        // setData("permissions",selectedValues);
+        alert("asdf")
+        setData("permissions",selectedValues);
         e.preventDefault();
+        // setData(prevData => ({
+        //     ...prevData,
+        //     permissions: selectedValues
+        // }));
         put(route("roles.update", role.id));
     }
 

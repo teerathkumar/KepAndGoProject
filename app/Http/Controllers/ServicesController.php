@@ -6,14 +6,26 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Validator;
-
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 class ServicesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view service', ['only' => ['index']]);
+        $this->middleware('permission:create service', ['only' => ['create','store']]);
+        $this->middleware('permission:update service', ['only' => ['update','edit']]);
+        $this->middleware('permission:delete service', ['only' => ['destroy']]);
+    }
+
     //
     public function index()
 
     {
-
+//        $superAdminRole = Role::findByName('super-admin');
+//        $allPermissionNames = Permission::pluck('name')->toArray();
+//        $superAdminRole->givePermissionTo($allPermissionNames);
+//        Auth()->user()->syncRoles($superAdminRole);
         $services = Service::all();
 
         return Inertia::render('Services/Index', ['services' => $services]);
