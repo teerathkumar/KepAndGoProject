@@ -16,50 +16,50 @@ class UserRolePermissionSeeder extends Seeder
     public function run(): void
     {
         //
-//        Permission::create(['name' => 'view role']);
-//        Permission::create(['name' => 'create role']);
-//        Permission::create(['name' => 'update role']);
-//        Permission::create(['name' => 'delete role']);
-//
-//        Permission::create(['name' => 'view permission']);
-//        Permission::create(['name' => 'create permission']);
-//        Permission::create(['name' => 'update permission']);
-//        Permission::create(['name' => 'delete permission']);
-//
-//        Permission::create(['name' => 'view user']);
-//        Permission::create(['name' => 'create user']);
-//        Permission::create(['name' => 'update user']);
-//        Permission::create(['name' => 'delete user']);
-//
-//        Permission::create(['name' => 'view customer']);
-//        Permission::create(['name' => 'create customer']);
-//        Permission::create(['name' => 'update customer']);
-//        Permission::create(['name' => 'delete customer']);
-//
-//        Permission::create(['name' => 'view document']);
-//        Permission::create(['name' => 'create document']);
-//        Permission::create(['name' => 'update document']);
-//        Permission::create(['name' => 'delete document']);
-//
-//        Permission::create(['name' => 'view lead']);
-//        Permission::create(['name' => 'create lead']);
-//        Permission::create(['name' => 'update lead']);
-//        Permission::create(['name' => 'delete lead']);
-//
-//        Permission::create(['name' => 'view office']);
-//        Permission::create(['name' => 'create office']);
-//        Permission::create(['name' => 'update office']);
-//        Permission::create(['name' => 'delete office']);
-//
-//        Permission::create(['name' => 'view service']);
-//        Permission::create(['name' => 'create service']);
-//        Permission::create(['name' => 'update service']);
-//        Permission::create(['name' => 'delete service']);
-//
-//        Permission::create(['name' => 'view ticket']);
-//        Permission::create(['name' => 'create ticket']);
-//        Permission::create(['name' => 'update ticket']);
-//        Permission::create(['name' => 'delete ticket']);
+        Permission::create(['name' => 'view role']);
+        Permission::create(['name' => 'create role']);
+        Permission::create(['name' => 'update role']);
+        Permission::create(['name' => 'delete role']);
+
+        Permission::create(['name' => 'view permission']);
+        Permission::create(['name' => 'create permission']);
+        Permission::create(['name' => 'update permission']);
+        Permission::create(['name' => 'delete permission']);
+
+        Permission::create(['name' => 'view user']);
+        Permission::create(['name' => 'create user']);
+        Permission::create(['name' => 'update user']);
+        Permission::create(['name' => 'delete user']);
+
+        Permission::create(['name' => 'view customer']);
+        Permission::create(['name' => 'create customer']);
+        Permission::create(['name' => 'update customer']);
+        Permission::create(['name' => 'delete customer']);
+
+        Permission::create(['name' => 'view document']);
+        Permission::create(['name' => 'create document']);
+        Permission::create(['name' => 'update document']);
+        Permission::create(['name' => 'delete document']);
+
+        Permission::create(['name' => 'view lead']);
+        Permission::create(['name' => 'create lead']);
+        Permission::create(['name' => 'update lead']);
+        Permission::create(['name' => 'delete lead']);
+
+        Permission::create(['name' => 'view office']);
+        Permission::create(['name' => 'create office']);
+        Permission::create(['name' => 'update office']);
+        Permission::create(['name' => 'delete office']);
+
+        Permission::create(['name' => 'view service']);
+        Permission::create(['name' => 'create service']);
+        Permission::create(['name' => 'update service']);
+        Permission::create(['name' => 'delete service']);
+
+        Permission::create(['name' => 'view ticket']);
+        Permission::create(['name' => 'create ticket']);
+        Permission::create(['name' => 'update ticket']);
+        Permission::create(['name' => 'delete ticket']);
 
         $superAdminRole = Role::findByName('super-admin');
         $allPermissionNames = Permission::pluck('name')->toArray();
