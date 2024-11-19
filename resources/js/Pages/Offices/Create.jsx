@@ -16,7 +16,7 @@ export default function Dashboard(props) {
 
         name: "",
 
-        parent_id: "",
+        parent_id: "0",
 
     });
 

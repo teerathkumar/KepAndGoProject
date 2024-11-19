@@ -7,8 +7,8 @@ import {Head, useForm, Link, usePage} from '@inertiajs/react';
 
 export default function Dashboard(props) {
 
-
     const {user, locations,roles,userRole} = usePage().props;
+
     const {data, setData, errors, put} = useForm({
         name: user.name || "",
         email: user.email || "",
@@ -17,7 +17,6 @@ export default function Dashboard(props) {
         location: user.location || "",
         roles: user.roles || "",
         photo: user.photo || ""
-
     });
 
 

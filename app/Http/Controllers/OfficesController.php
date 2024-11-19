@@ -65,13 +65,15 @@ class OfficesController extends Controller
 
     {
 
+//        dd($request->all());
         Validator::make($request->all(), [
 
-            'name' => ['required'],
-
-            'parent_id' => ['required'],
+            'name' => ['required']
 
         ])->validate();
+
+//        echo "1";
+//        dd($request->all());
 
 
         Office::create($request->all());
