@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 
 // import Authenticated from '@/Layouts/Authenticated';
 
@@ -9,11 +9,19 @@ import { Inertia } from "@inertiajs/inertia";
 
 import { Head, usePage, Link } from '@inertiajs/react';
 import moment from "moment/moment.js";
+import {showToast} from "@/Components/Theme/ToastContainer.jsx";
 
 export default function Dashboard(props) {
 
-    const { customers:initialDocuments } = usePage().props
-
+    const { customers:initialDocuments, success, error } = usePage().props
+    useEffect(() => {
+        if (success) {
+            showToast(success, 'success');
+        }
+        if (error) {
+            showToast(error, 'error');
+        }
+    }, [success,error]);
     const [customers, setCustomers] = useState(initialDocuments); // Initialize state with menus
     function searchData(val){
         if(val==""){
@@ -107,132 +115,138 @@ export default function Dashboard(props) {
                                 <div className="card-body px-0 pt-0 pb-2">
                                     <div className="table-responsive p-0">
                                         <table className="table align-items-center mb-0">
-                                    <thead>
-                                    <tr>
-                                        <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                            ID
-                                        </th>
-                                        <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                            Photo
-                                        </th>
-                                        <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                            Name
-                                        </th>
-                                        <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                            Email
-                                        </th>
-                                        <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                            Phone
-                                        </th>
-                                        <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                            Creation Date
-                                        </th>
-                                        <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                            Action
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
+                                            <thead>
+                                            <tr>
+                                                <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
+                                                    ID
+                                                </th>
+                                                <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
+                                                    Photo
+                                                </th>
+                                                <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
+                                                    Name
+                                                </th>
+                                                <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
+                                                    Email
+                                                </th>
+                                                <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
+                                                    Phone
+                                                </th>
+                                                <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
+                                                    Creation Date
+                                                </th>
+                                                <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
+                                                    Action
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
 
-                                    {customers.map((val, index) => (
+                                            {customers.data.map((val, index) => (
 
-                                        <tr key={index}>
+                                                <tr key={index}>
 
-                                            <td className="ps-4">
-                                                <p className="text-xs font-weight-bold mb-0">{val.id}</p>
+                                                    <td className="ps-4">
+                                                        <p className="text-xs font-weight-bold mb-0">{val.id}</p>
 
-                                            </td>
-                                            <td className="ps-4">
-                                                <div>
-                                                    <img src="./assets/img/team-2.jpg"
-                                                         className="avatar avatar-sm me-3"/>
-                                                </div>
-                                            </td>
-                                            <td className="ps-4">
-                                                <p className="text-xs font-weight-bold mb-0">{val.name}</p>
-                                            </td>
+                                                    </td>
+                                                    <td className="ps-4">
+                                                        <div>
+                                                            <img src="./assets/img/team-2.jpg"
+                                                                 className="avatar avatar-sm me-3"/>
+                                                        </div>
+                                                    </td>
+                                                    <td className="ps-4">
+                                                        <p className="text-xs font-weight-bold mb-0">{val.name}</p>
+                                                    </td>
 
-                                            <td className="ps-4">
-                                                <p className="text-xs font-weight-bold mb-0">{val.phone}</p>
-                                            </td>
-                                            <td className="ps-4">
-                                                <p className="text-xs font-weight-bold mb-0">{val.email}</p>
-                                            </td>
-                                            <td className="ps-4">
-                                                <p className="text-xs font-weight-bold mb-0">{moment(val.created_at).format("DD MMM YYYY")}</p>
-                                            </td>
-                                            <td>
-                                                <Link
+                                                    <td className="ps-4">
+                                                        <p className="text-xs font-weight-bold mb-0">{val.phone}</p>
+                                                    </td>
+                                                    <td className="ps-4">
+                                                        <p className="text-xs font-weight-bold mb-0">{val.email}</p>
+                                                    </td>
+                                                    <td className="ps-4">
+                                                        <p className="text-xs font-weight-bold mb-0">{moment(val.created_at).format("DD MMM YYYY")}</p>
+                                                    </td>
+                                                    <td>
+                                                        <Link
 
-                                                    tabIndex="2"
+                                                            tabIndex="2"
 
-                                                    className="mx-3"
-                                                    data-bs-toggle="tooltip"
-                                                    data-bs-original-title="Edit user"
+                                                            className="mx-3"
+                                                            data-bs-toggle="tooltip"
+                                                            data-bs-original-title="Edit user"
 
-                                                    href={route("documents.gallery", [val.id])}
+                                                            href={route("documents.gallery", [val.id])}
 
-                                                >
-                                                    <i className="fa fa-folder-open	 text-secondary"></i>
-                                                </Link>
-                                                <Link
+                                                        >
+                                                            <i className="fa fa-folder-open	 text-secondary"></i>
+                                                        </Link>
+                                                        <Link
 
-                                                    tabIndex="1"
+                                                            tabIndex="1"
 
-                                                    className="me-3"
-                                                    data-bs-toggle="tooltip"
-                                                    data-bs-original-title="Edit user"
+                                                            className="me-3"
+                                                            data-bs-toggle="tooltip"
+                                                            data-bs-original-title="Edit user"
 
-                                                    href={route("customers.edit", val.id)}
+                                                            href={route("customers.edit", val.id)}
 
-                                                >
-                                                    <i className="fas fa-user-edit text-secondary"></i>
-                                                </Link>
-
-
-                                                <button
-
-                                                    onClick={destroy}
-
-                                                    id={val.id}
-
-                                                    tabIndex="-1"
-
-                                                    type="button"
+                                                        >
+                                                            <i className="fas fa-user-edit text-secondary"></i>
+                                                        </Link>
 
 
-                                                >
+                                                        <button
 
-                                                    <i className="cursor-pointer fas fa-trash text-secondary"></i>
+                                                            onClick={destroy}
 
-                                                </button>
+                                                            id={val.id}
 
-                                            </td>
+                                                            tabIndex="-1"
 
-                                        </tr>
-
-                                    ))}
+                                                            type="button"
 
 
-                                    {customers.length === 0 && (
+                                                        >
 
-                                        <tr>
+                                                            <i className="cursor-pointer fas fa-trash text-secondary"></i>
 
-                                            <td colSpan="6">
+                                                        </button>
 
-                                                <p className="text-xs font-weight-bold mb-0">No customers found.</p>
+                                                    </td>
 
-                                            </td>
+                                                </tr>
 
-                                        </tr>
-
-                                    )}
+                                            ))}
 
 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                                            {customers.data.length === 0 && (
+
+                                                <tr>
+
+                                                    <td colSpan="6">
+
+                                                        <p className="text-xs font-weight-bold mb-0">No customers
+                                                            found.</p>
+
+                                                    </td>
+
+                                                </tr>
+
+                                            )}
+
+
+                                            </tbody>
+                                        </table>
+                                        <div className="pagination mx-4"> {customers.links.map((link, index) => (
+                                            <Link key={index} href={link.url}
+                                                  className={`btn bg-gradient-secondary btn-sm mb-0 pagination-link ${link.active ? 'active' : ''}`}
+                                                  dangerouslySetInnerHTML={{__html: link.label}}/>))}
+                                        </div>
+                                    </div>
+                                </div>
                     </div>
                 </div>
 

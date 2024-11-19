@@ -8,15 +8,15 @@ import {Head, useForm, Link, usePage} from '@inertiajs/react';
 export default function Dashboard(props) {
 
 
-    const {user, locations} = usePage().props;
+    const {user, locations,roles,userRole} = usePage().props;
     const {data, setData, errors, put} = useForm({
         name: user.name || "",
         email: user.email || "",
         password: user.password || "",
         phone: user.phone || "",
         location: user.location || "",
-        role: user.role || "",
-        photo: user.phone || ""
+        roles: user.roles || "",
+        photo: user.photo || ""
 
     });
 
@@ -289,29 +289,29 @@ export default function Dashboard(props) {
 
                                     <label className="">Role</label>
 
-                                    <select className="w-full rounded" label="role"
+                                    <select className="w-full rounded select2" label="roles"
 
-                                            name="role"
-
-                                            errors={errors.role}
+                                            name="roles"
+                                            errors={errors.roles}
+                                            multiple={true}
 
                                             onChange={(e) =>
 
-                                                setData("role", e.target.value)
+                                                setData("roles", e.target.value)
 
                                             }>
-                                        <option value="0">No Role</option>
+                                        <option value={""}>no role</option>
                                         {
-                                            ['Admin', 'User'].map((val, index) => {
+                                            roles.map((val, index) => {
                                                 return (
-                                                    <option key={index} value={index}>{val}</option>
+                                                    <option key={index} value={val.name}>{val.name}</option>
                                                 );
                                             })
                                         }
                                     </select>
                                     <span className="text-red-600">
 
-                                            {errors.role}
+                                            {errors.roles}
 
                                         </span>
 

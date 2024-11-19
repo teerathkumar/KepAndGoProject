@@ -24,7 +24,7 @@ class TicketsController extends Controller
 
     {
 
-        $tickets = Ticket::with('lead','user')->get();
+        $tickets = Ticket::with('lead','user')->paginate();
 
         return Inertia::render('Tickets/Index', ['tickets' => $tickets]);
 
@@ -75,7 +75,7 @@ class TicketsController extends Controller
         Ticket::create($request->all());
 
 
-        return redirect()->route('tickets.index');
+        return redirect()->route('tickets.index')->with('success', 'Ticket created successfully.');
 
     }
 
@@ -123,7 +123,7 @@ class TicketsController extends Controller
 
         Ticket::find($id)->update($request->all());
 
-        return redirect()->route('tickets.index');
+        return redirect()->route('tickets.index')->with('success', 'Ticket updated successfully.');
 
     }
 
@@ -137,6 +137,6 @@ class TicketsController extends Controller
     public function destroy($id)
     {
         Ticket::find($id)->delete();
-        return redirect()->route('tickets.index');
+        return redirect()->route('tickets.index')->with('success', 'Ticket deleted successfully.');
     }
 }

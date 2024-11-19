@@ -217,17 +217,16 @@ export default function Dashboard() {
                             <div className="row">
                                 <div className="col-8">
                                     <div className="numbers">
-                                        <p className="text-sm mb-0 text-capitalize font-weight-bold">Today's Money</p>
+                                        <p className="text-sm mb-0 text-capitalize font-weight-bold">Active Tickets</p>
                                         <h5 className="font-weight-bolder mb-0">
-                                            $53,000
-                                            <span className="text-success text-sm font-weight-bolder">+55%</span>
+                                            53
                                         </h5>
                                     </div>
                                 </div>
                                 <div className="col-4 text-end">
                                     <div
                                         className="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                        <i className="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                                        <i className="ni ni-glasses-2 text-lg opacity-10" aria-hidden="true"></i>
                                     </div>
                                 </div>
                             </div>
@@ -240,17 +239,16 @@ export default function Dashboard() {
                             <div className="row">
                                 <div className="col-8">
                                     <div className="numbers">
-                                        <p className="text-sm mb-0 text-capitalize font-weight-bold">Today's Users</p>
+                                        <p className="text-sm mb-0 text-capitalize font-weight-bold">Active Leads</p>
                                         <h5 className="font-weight-bolder mb-0">
                                             2,300
-                                            <span className="text-success text-sm font-weight-bolder">+3%</span>
                                         </h5>
                                     </div>
                                 </div>
                                 <div className="col-4 text-end">
                                     <div
                                         className="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                        <i className="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                                        <i className="ni ni-books text-lg opacity-10" aria-hidden="true"></i>
                                     </div>
                                 </div>
                             </div>
@@ -263,17 +261,16 @@ export default function Dashboard() {
                             <div className="row">
                                 <div className="col-8">
                                     <div className="numbers">
-                                        <p className="text-sm mb-0 text-capitalize font-weight-bold">New Clients</p>
+                                        <p className="text-sm mb-0 text-capitalize font-weight-bold">Today's Sale</p>
                                         <h5 className="font-weight-bolder mb-0">
-                                            +3,462
-                                            <span className="text-danger text-sm font-weight-bolder">-2%</span>
+                                            $3,462
                                         </h5>
                                     </div>
                                 </div>
                                 <div className="col-4 text-end">
                                     <div
                                         className="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                        <i className="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+                                        <i className="ni ni-chart-bar-32 text-lg opacity-10" aria-hidden="true"></i>
                                     </div>
                                 </div>
                             </div>
@@ -286,17 +283,16 @@ export default function Dashboard() {
                             <div className="row">
                                 <div className="col-8">
                                     <div className="numbers">
-                                        <p className="text-sm mb-0 text-capitalize font-weight-bold">Sales</p>
+                                        <p className="text-sm mb-0 text-capitalize font-weight-bold">This Month Sales</p>
                                         <h5 className="font-weight-bolder mb-0">
                                             $103,430
-                                            <span className="text-success text-sm font-weight-bolder">+5%</span>
                                         </h5>
                                     </div>
                                 </div>
                                 <div className="col-4 text-end">
                                     <div
                                         className="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                        <i className="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+                                        <i className="ni ni-chart-pie-35 text-lg opacity-10" aria-hidden="true"></i>
                                     </div>
                                 </div>
                             </div>

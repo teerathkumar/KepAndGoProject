@@ -15,7 +15,7 @@ export default function Dashboard(props) {
         password:"",
         phone:"",
         location:"",
-        role:"",
+        roles:[],
         photo:"",
         password_confirmation:""
 
@@ -292,26 +292,27 @@ export default function Dashboard(props) {
 
                                     <select className="w-full rounded select2" label="roles"
 
-                                            name="role"
-                                            errors={errors.role}
+                                            name="roles[]"
+                                            errors={errors.roles}
+                                            multiple={true}
 
                                             onChange={(e) =>
 
-                                                setData("role", e.target.value)
+                                                setData("roles", e.target.value)
 
                                             }>
                                         <option value={""}>no role</option>
                                         {
                                             roles.map((val, index) => {
                                                 return (
-                                                    <option key={index} value={val.id}>{val.name}</option>
+                                                    <option key={index} value={val.name}>{val.name}</option>
                                                 );
                                             })
                                         }
                                     </select>
                                     <span className="text-red-600">
 
-                                            {errors.role}
+                                            {errors.roles}
 
                                         </span>
 

@@ -26,7 +26,7 @@ class ServicesController extends Controller
 //        $allPermissionNames = Permission::pluck('name')->toArray();
 //        $superAdminRole->givePermissionTo($allPermissionNames);
 //        Auth()->user()->syncRoles($superAdminRole);
-        $services = Service::all();
+        $services = Service::paginate();
 
         return Inertia::render('Services/Index', ['services' => $services]);
 

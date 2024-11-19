@@ -9,11 +9,19 @@ import {Inertia} from "@inertiajs/inertia";
 import {Head, usePage, Link, useForm} from '@inertiajs/react';
 import Modal from '@/Components/Modal.jsx';
 import ImageUploading from 'react-images-uploading';
+import {showToast} from "@/Components/Theme/ToastContainer.jsx";
 
 export default function (props) {
     const base_url = import.meta.env.VITE_API_URL;
-    const {documents: initialDocuments, customer_id} = usePage().props
-
+    const {documents: initialDocuments, customer_id, success, error} = usePage().props
+    useEffect(() => {
+        if (success) {
+            showToast(success, 'success');
+        }
+        if (error) {
+            showToast(error, 'error');
+        }
+    }, [success,error]);
     const [documents, setDocuments] = useState(initialDocuments); // Initialize state with menus
     function searchData(val) {
         axios.get(`/documents/search/${customer_id}/${val}`)
@@ -145,8 +153,10 @@ export default function (props) {
                 if (response.status == 200) {
                     $("#exampleModal").modal('toggle');//.fadeOut();
                     hello(selectedFolder);
+                    showToast("File created Successfully", 'success');
                 } else {
-                    alert("something went wrong");
+                    // alert("something went wrong");
+                    showToast("Something went wrong", 'error');
                 }
             })
             .catch(function (response) {
@@ -402,6 +412,15 @@ export default function (props) {
 
                                             </div>
                                         ))
+                                    }
+                                    {
+                                        documents.documents.length === 0 && (
+                                            <div className="col-xl-12 col-sm-6 text-center">
+
+                                                <p className="text-xs font-weight-bold mb-0">No Folders
+                                                    found.</p>
+                                            </div>
+                                        )
                                     }
 
                                 </div>

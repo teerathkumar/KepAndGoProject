@@ -17,8 +17,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Role extends Model
 {
-    
-    protected $perPage = 20;
+
+    protected $perPage = 8;
 
     /**
      * The attributes that are mass assignable.

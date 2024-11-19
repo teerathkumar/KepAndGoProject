@@ -14,7 +14,7 @@
         <link href="{{Vite::asset('resources/assets/css/nucleo-icons.css')}}" rel="stylesheet" />
         <link href="{{Vite::asset('resources/assets/css/nucleo-svg.css')}}" rel="stylesheet" />
         <!-- Font Awesome Icons -->
-        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/a241685d79.js" crossorigin="anonymous"></script>
         <!-- CSS Files -->
         <link id="pagestyle" href="{{Vite::asset('resources/assets/css/soft-ui-dashboard.css')}}" rel="stylesheet" />
         <!-- Scripts -->
@@ -40,14 +40,7 @@
         @inertiaHead
     </head>
     <body class="g-sidenav-show  bg-gray-100">
-    @if(session()->has('success'))
-        <div x-data="{ show: true}"
-             x-init="setTimeout(() => show = false, 40000)"
-             x-show="show"
-             class="position-fixed bg-success rounded right-3 text-sm py-2 px-4" style="z-index: 11111;">
-            <p class="m-0">{{ session('success')}}</p>
-        </div>
-    @endif
+
         @inertia
 
 

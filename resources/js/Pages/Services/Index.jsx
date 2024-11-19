@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 
 // import Authenticated from '@/Layouts/Authenticated';
 
@@ -8,11 +8,19 @@ import {Inertia} from "@inertiajs/inertia";
 import Modal from "@/Components/Modal.jsx";
 import moment from "moment";
 import {Head, usePage, Link} from '@inertiajs/react';
+import {showToast} from "@/Components/Theme/ToastContainer.jsx";
 
 export default function (props) {
 
-    const {services} = usePage().props
-
+    const {services,success, error} = usePage().props
+    useEffect(() => {
+        if (success) {
+            showToast(success, 'success');
+        }
+        if (error) {
+            showToast(error, 'error');
+        }
+    }, [success,error]);
     function destroy(e) {
 
         if (confirm("Are you sure you want to delete this service?")) {
@@ -82,7 +90,7 @@ export default function (props) {
                                 </thead>
                                 <tbody>
 
-                                {services.map((val, index) => (
+                                {services.data.map((val, index) => (
 
                                     <tr key={index}>
 
@@ -95,7 +103,12 @@ export default function (props) {
                                         </td>
 
                                         <td className="align-middle text-center text-sm">
-                                            <span className="badge badge-sm bg-gradient-success">Online</span>
+                                            {
+                                                val.status ?
+                                                    <span className="badge badge-sm bg-gradient-success">Active</span>
+                                                    :
+                                                    <span className="badge badge-sm bg-gradient-error">Inactive</span>
+                                            }
                                         </td>
                                         <td className="align-middle text-center text-sm">
                                             <p className="text-xs font-weight-bold mb-0">{moment(val.created_at).format("DD MMM YYYY")}</p>
@@ -140,13 +153,13 @@ export default function (props) {
                                 ))}
 
 
-                                {services.length === 0 && (
+                                {services.data.length === 0 && (
 
                                     <tr>
 
                                         <td colSpan="8" align={"center"}>
 
-                                        <p className="text-xs font-weight-bold mb-0">No services found.</p>
+                                            <p className="text-xs font-weight-bold mb-0">No services found.</p>
 
                                         </td>
 
@@ -157,11 +170,15 @@ export default function (props) {
 
                                 </tbody>
                             </table>
+                            <div className="pagination mx-4"> {services.links.map((link, index) => (
+                                <Link key={index} href={link.url}
+                                      className={`btn bg-gradient-secondary btn-sm mb-0 pagination-link ${link.active ? 'active' : ''}`}
+                                      dangerouslySetInnerHTML={{__html: link.label}}/>))}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
 
 
         </Authenticated>

@@ -29,7 +29,7 @@ class OfficesController extends Controller
     {
         try{
 
-            $offices = Office::with("parent")->get();
+            $offices = Office::with("parent")->paginate();
 
             return Inertia::render('Offices/Index', ['offices' => $offices]);
         } catch (UnauthorizedException $exception) {
@@ -77,7 +77,7 @@ class OfficesController extends Controller
         Office::create($request->all());
 
 
-        return redirect()->route('offices.index');
+        return redirect()->route('offices.index')->with('success', 'Office created successfully.');
 
     }
 
@@ -123,7 +123,7 @@ class OfficesController extends Controller
 
         Office::find($id)->update($request->all());
 
-        return redirect()->route('offices.index');
+        return redirect()->route('offices.index')->with('success', 'Office updated successfully.');
 
     }
 
@@ -137,6 +137,6 @@ class OfficesController extends Controller
     public function destroy($id)
     {
         Office::find($id)->delete();
-        return redirect()->route('offices.index');
+        return redirect()->route('offices.index')->with('success', 'Office deleted successfully.');
     }
 }

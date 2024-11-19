@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('photo')->nullable();
             $table->rememberToken();
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
 

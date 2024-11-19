@@ -28,14 +28,14 @@ class CustomersController extends Controller
         if($keyword && $keyword!="null" && $keyword!==null){
             $customers->where('name', 'LIKE', "%$keyword%");
         }
-        $customers = $customers->get();
+        $customers = $customers->paginate();
         return response()->json($customers);
     }
     public function index()
 
     {
 
-        $customers = Customer::all();
+        $customers = Customer::paginate();
 
         return Inertia::render('Customers/Index', ['customers' => $customers]);
 
@@ -81,7 +81,7 @@ class CustomersController extends Controller
         Customer::create($request->all());
 
 
-        return redirect()->route('customers.index');
+        return redirect()->route('customers.index')->with('success', 'Customer created successfully.');
 
     }
 
@@ -128,7 +128,7 @@ class CustomersController extends Controller
 
         Customer::find($id)->update($request->all());
 
-        return redirect()->route('customers.index');
+        return redirect()->route('customers.index')->with('success', 'Customer updated successfully.');
 
     }
 
@@ -142,6 +142,6 @@ class CustomersController extends Controller
     public function destroy($id)
     {
         Customer::find($id)->delete();
-        return redirect()->route('customers.index');
+        return redirect()->route('customers.index')->with('success', 'Customer deleted successfully.');
     }
 }

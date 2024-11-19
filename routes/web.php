@@ -42,9 +42,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [\App\Http\Controllers\HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::group(['middleware' => ['role:super-admin|admin']], function() {
     Route::resource('permissions', App\Http\Controllers\PermissionController::class);
@@ -54,6 +52,7 @@ Route::group(['middleware' => ['role:super-admin|admin']], function() {
     Route::get('roles/{roleId}/delete', [App\Http\Controllers\RoleController::class, 'destroy']);
     Route::get('roles/{roleId}/give-permissions', [App\Http\Controllers\RoleController::class, 'addPermissionToRole']);
     Route::put('roles/{roleId}/give-permissions', [App\Http\Controllers\RoleController::class, 'givePermissionToRole']);
+    Route::put('users/{userId}/update-status', [App\Http\Controllers\InfoUserController::class, 'updateStatus'])->name('users.updateStatus');
 });
 
 Route::group(['middleware' => 'auth'], function () {
