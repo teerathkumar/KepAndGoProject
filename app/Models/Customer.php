@@ -11,6 +11,7 @@ class Customer extends Model
     use HasFactory;
     protected $fillable = ['name', 'phone', 'address', 'email'];
 
+    protected $perPage = 8;
     public function documents(){
         return $this->hasMany(CustomerDocument::class);
     }

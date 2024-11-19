@@ -225,7 +225,14 @@ export default function Sidebar(props) {
                         </NavLink>
                     </li>
                     <li className="nav-item pb-2">
-                        <NavLink href={route('users.index')} active={route().current('users.index')}>
+                        <NavLink href={route('users.index')} active={
+                            route().current('users.index') ||
+                            route().current('users.create') ||
+                            route().current('users.edit') ||
+                            route().current('roles.index') ||
+                            route().current('roles.create') ||
+                            route().current('roles.edit')
+                        }>
                             <div
                                 className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <i style={{fontSize: "1rem"}}
@@ -235,22 +242,7 @@ export default function Sidebar(props) {
                             <span className="nav-link-text ms-1">User Management</span>
                         </NavLink>
                     </li>
-                    <li className="nav-item pb-2">
-                        <NavLink href={route('roles.index')} active={route().current('roles.index')}>
-                            <div
-                                className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                     viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2"
-                                          d="M9.5 11.5 11 13l4-3.5M12 20a16.405 16.405 0 0 1-5.092-5.804A16.694 16.694 0 0 1 5 6.666L12 4l7 2.667a16.695 16.695 0 0 1-1.908 7.529A16.406 16.406 0 0 1 12 20Z"/>
-                                </svg>
 
-                            </div>
-                            <span className="nav-link-text ms-1">Roles Management</span>
-                        </NavLink>
-                    </li>
                     <li className="nav-item">
                         <NavLink href={route('profiles.index')}
                                  active={route().current('profiles.index') || route().current('profiles.create') || route().current('profiles.edit')}>

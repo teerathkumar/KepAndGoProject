@@ -152,7 +152,7 @@ class DocumentsController extends Controller
         CustomerDocument::create($data);
 
 
-        return redirect()->route('documents.gallery',[$request->customer_id]);
+        return redirect()->route('documents.gallery',[$request->customer_id])->with(['success'=>'Folder created successfully']);
 
     }
 
@@ -199,7 +199,7 @@ class DocumentsController extends Controller
 
         CustomerDocument::find($id)->update($request->all());
 
-        return redirect()->route('documents.index');
+        return redirect()->route('documents.index')->with(['success'=>'Folder updated successfully']);
 
     }
 
@@ -213,6 +213,6 @@ class DocumentsController extends Controller
     public function destroy($id)
     {
         CustomerDocument::find($id)->delete();
-        return redirect()->route('documents.index');
+        return redirect()->route('documents.index')->with(['success'=>'Folder deleted successfully']);
     }
 }

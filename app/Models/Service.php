@@ -9,5 +9,6 @@ class Service extends Model
 {
     //
     use HasFactory;
+    protected $perPage = 8;
     protected $fillable = ['name','status'];
 }

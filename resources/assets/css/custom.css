@@ -387,3 +387,28 @@ body {
         overflow-x: auto
     }
 }
+/* resources/css/app.css */
+.pagination {
+    display: flex;
+    justify-content: right;
+    margin-top: 20px;
+}
+
+.pagination-link {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.pagination-link.active {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.pagination-link:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}

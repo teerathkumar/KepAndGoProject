@@ -53,7 +53,7 @@ class LeadsController extends Controller
 //            ]
 //        );
 
-        $leads = Lead::with('customer','service')->get();
+        $leads = Lead::with('customer','service')->paginate();
 
         return Inertia::render('Leads/Index', ['leads' => $leads]);
 
@@ -101,7 +101,7 @@ class LeadsController extends Controller
         Lead::create($request->all());
 
 
-        return redirect()->route('leads.index');
+        return redirect()->route('leads.index')->with('success', 'Lead created successfully.');
 
     }
 
@@ -153,7 +153,7 @@ class LeadsController extends Controller
 
         Lead::find($id)->update($request->all());
 
-        return redirect()->route('leads.index');
+        return redirect()->route('leads.index')->with('success', 'Lead updated successfully.');
 
     }
 
@@ -167,6 +167,6 @@ class LeadsController extends Controller
     public function destroy($id)
     {
         Lead::find($id)->delete();
-        return redirect()->route('leads.index');
+        return redirect()->route('leads.index')->with('success', 'Lead deleted successfully.');
     }
 }

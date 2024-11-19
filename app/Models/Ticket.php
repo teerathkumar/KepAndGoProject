@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     //
+    protected $perPage = 8;
     use HasFactory;
     protected $fillable = ['title','lead_id','user_id'];
 

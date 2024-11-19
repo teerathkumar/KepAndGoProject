@@ -22,7 +22,7 @@ class RoleController extends Controller
     public function index()
     {
 
-        $roles = Role::get();
+        $roles = Role::paginate();
         return Inertia::render('Roles/Index', ['roles' => $roles]);
     }
 

@@ -10,7 +10,7 @@ class Lead extends Model
     //
     use HasFactory;
     protected $fillable = ['title','body','customer_id','service_id'];
-
+    protected $perPage = 8;
     public function customer(){
         return $this->belongsTo(Customer::class);
     }

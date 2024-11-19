@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 
 // import Authenticated from '@/Layouts/Authenticated';
 
@@ -9,11 +9,19 @@ import Modal from "@/Components/Modal.jsx";
 
 import {Head, usePage, Link} from '@inertiajs/react';
 import moment from "moment";
+import {showToast} from "@/Components/Theme/ToastContainer.jsx";
 
 export default function (props) {
 
-    const {roles} = usePage().props
-
+    const {roles, success, error} = usePage().props
+    useEffect(() => {
+        if (success) {
+            showToast(success, 'success');
+        }
+        if (error) {
+            showToast(error, 'error');
+        }
+    }, [success,error]);
     function destroy(e) {
 
         if (confirm("Are you sure you want to delete this role?")) {

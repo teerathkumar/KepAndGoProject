@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 
 // import Authenticated from '@/Layouts/Authenticated';
 
@@ -8,11 +8,19 @@ import { Inertia } from "@inertiajs/inertia";
 import moment  from "moment";
 
 import { Head, usePage, Link } from '@inertiajs/react';
+import {showToast} from "@/Components/Theme/ToastContainer.jsx";
 
 export default function Dashboard(props) {
 
-    const { offices } = usePage().props
-
+    const { offices, success, error } = usePage().props
+    useEffect(() => {
+        if (success) {
+            showToast(success, 'success');
+        }
+        if (error) {
+            showToast(error, 'error');
+        }
+    }, [success,error]);
     function destroy(e) {
 
         if (confirm("Are you sure you want to delete this office?")) {
@@ -83,7 +91,7 @@ export default function Dashboard(props) {
                                 </thead>
                                 <tbody>
 
-                                {offices.map((val, index) => (
+                                {offices.data.map((val, index) => (
 
                                     <tr key={index}>
 
@@ -143,7 +151,7 @@ export default function Dashboard(props) {
                                 ))}
 
 
-                                {offices.length === 0 && (
+                                {offices.data.length === 0 && (
 
                                     <tr>
 
@@ -160,6 +168,11 @@ export default function Dashboard(props) {
 
                                 </tbody>
                             </table>
+                            <div className="pagination mx-4"> {offices.links.map((link, index) => (
+                                <Link key={index} href={link.url}
+                                      className={`btn bg-gradient-secondary btn-sm mb-0 pagination-link ${link.active ? 'active' : ''}`}
+                                      dangerouslySetInnerHTML={{__html: link.label}}/>))}
+                            </div>
                         </div>
                     </div>
                 </div>

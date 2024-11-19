@@ -24,7 +24,7 @@ class InfoUserController extends Controller
     }
 
     public function index(){
-        $users = User::all();
+        $users = User::paginate();
         return Inertia::render('Users/Index', ['users'=>$users]);
     }
     public function create()
@@ -49,7 +49,7 @@ class InfoUserController extends Controller
             'email' => ['required', 'email', 'max:50', Rule::unique('users')->ignore(Auth::user()->id)],
             'phone'     => ['max:50'],
             'location' => ['max:70'],
-            'role'=>['required'],
+            'roles'=>['required'],
             'password' => ['required', 'min:8', 'confirmed'],
         ]);
         if($request->hasfile('photo')){
@@ -61,7 +61,7 @@ class InfoUserController extends Controller
             $attributes['photo'] = null;
         }
 
-        unset($attributes['role']);
+        unset($attributes['roles']);
 
 //        dd($attributes);
 
@@ -80,7 +80,7 @@ class InfoUserController extends Controller
     public function edit(User $user)
 
     {
-        $roles = Role::pluck('name','name')->all();
+        $roles = Role::all();
         $userRoles = $user->roles->pluck('name','name')->all();
         $locations = Office::all();
         return Inertia::render('Users/Edit', [
@@ -94,12 +94,13 @@ class InfoUserController extends Controller
 
     }
     public function update(Request $request, User $user){
+//        dd($request->all());
         $attributes = $request->validate([
             'name' => ['required', 'max:50'],
-            'email' => ['required', 'email', 'max:50', Rule::unique('users')->ignore(Auth::user()->id)],
+            'email' => ['required', 'email', 'max:50', Rule::unique('users')->ignore($user->id)],
             'phone'     => ['max:50'],
             'location' => ['max:70'],
-            'role'=>['required'],
+            'roles'=>['required'],
             'password' => ['required', 'min:8', 'confirmed'],
         ]);
         if($request->hasfile('photo')){
@@ -107,14 +108,20 @@ class InfoUserController extends Controller
             $filename = time().".".$photo->getClientOriginalExtension();
             $path=$photo->storeAs('uploads', $filename, 'public');
             $attributes['photo'] = $path;
-        } else {
-            $attributes['photo'] = null;
         }
 
-        unset($attributes['role']);
+        unset($attributes['roles']);
         $user->update($attributes);
         $user->syncRoles($request->roles);
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
+    }
+    public function updateStatus(Request $request, $user_id){
+//        dd($user);
+//        dd($request->all());
+//        dd($user_id);
+        $user = User::find($user_id);
+        $user->update($request->only('status'));
+        return redirect()->route('users.index')->with('success', 'User status updated successfully.');
     }
 
     public function destroy($id)

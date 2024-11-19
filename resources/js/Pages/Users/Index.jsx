@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 
 // import Authenticated from '@/Layouts/Authenticated';
 
@@ -8,11 +8,21 @@ import {Inertia} from "@inertiajs/inertia";
 import moment from "moment";
 
 import {Head, usePage, Link} from '@inertiajs/react';
+import {showToast} from "@/Components/Theme/ToastContainer.jsx";
 
 export default function (props) {
 
-    const {users} = usePage().props
+    const {users, success, error} = usePage().props
     const base_url = import.meta.env.VITE_API_URL;
+    useEffect(() => {
+        if (success) {
+            showToast(success, 'success');
+        }
+        if (error) {
+            showToast(error, 'error');
+        }
+    }, [success, error]);
+
     function destroy(e) {
 
         if (confirm("Are you sure you want to delete this user?")) {
@@ -23,6 +33,12 @@ export default function (props) {
 
     }
 
+    const [formData, setFormData] = useState({status: ''});
+    const handleSubmit = (e, id, status) => {
+        e.preventDefault();
+        const updatedFormData = { ...formData, status: !status };
+        Inertia.put(route('users.updateStatus', id), updatedFormData);
+    };
     return (
 
         <Authenticated
@@ -45,22 +61,36 @@ export default function (props) {
                                 <div>
                                     <h5 className="mb-0">All Users</h5>
                                 </div>
-                                <Link
+                                <div className="text-right">
 
-                                    className="btn bg-gradient-primary btn-sm mb-0" type="button"
+                                    <Link
 
-                                    href={route("users.create")}
+                                        className="btn bg-gradient-primary btn-sm mb-0 mr-2" type="button"
 
-                                >
+                                        href={route("users.create")}
 
-                                    +&nbsp; Create User
+                                    >
 
-                                </Link>
+                                        +&nbsp; Create User
+
+                                    </Link>
+                                    <Link
+
+                                        className="btn bg-gradient-secondary btn-sm mb-0" type="button"
+
+                                        href={route("roles.index")}
+
+                                    >
+
+                                        User Roles & Permissions
+
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                         <div className="card-body px-0 pt-0 pb-2">
                             <div className="table-responsive p-0">
-                                <table className="table align-items-center mb-0">
+                                <table className="table align-items-center text-left mb-0">
                                     <thead>
                                     <tr>
                                         <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -76,7 +106,10 @@ export default function (props) {
                                             Email
                                         </th>
                                         <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            role
+                                            Role
+                                        </th>
+                                        <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Status
                                         </th>
                                         <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Creation Date
@@ -87,74 +120,108 @@ export default function (props) {
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {users.map((val, index) => (
-                                    <tr>
-                                        <td className="ps-4">
-                                            <p className="text-xs font-weight-bold mb-0">{val.id}</p>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                {
-                                                    val.photo !== null ?
-                                                        <img src={base_url + "/" + val.photo}
-                                                             className="avatar avatar-sm me-3"/>
-                                                        :
-                                                        <img src={base_url + "/assets/img/team-2.jpg"}
-                                                             className="avatar avatar-sm me-3"/>
-                                                }
+                                    {users.data.map((val, index) => (
+                                        <tr>
+                                            <td className="ps-4">
+                                                <p className="text-xs font-weight-bold mb-0">{val.id}</p>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    {
+                                                        val.photo !== null ?
+                                                            <img src={base_url + "/" + val.photo}
+                                                                 className="avatar avatar-sm me-3"/>
+                                                            :
+                                                            <img src={base_url + "/assets/img/team-2.jpg"}
+                                                                 className="avatar avatar-sm me-3"/>
+                                                    }
 
-                                            </div>
-                                        </td>
-                                        <td className="text-center">
-                                            <p className="text-xs font-weight-bold mb-0">{val.name}</p>
-                                        </td>
-                                        <td className="text-center">
-                                            <p className="text-xs font-weight-bold mb-0">{val.email}</p>
-                                        </td>
-                                        <td className="text-center">
-                                            <p className="text-xs font-weight-bold mb-0">Admin</p>
-                                        </td>
-                                        <td className="text-center">
-                                            <span className="text-secondary text-xs font-weight-bold">{moment(val.created_at).format("DD MMM YYYY")}</span>
-                                        </td>
-                                        <td>
-                                            <Link
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p className="text-xs font-weight-bold mb-0">{val.name}</p>
+                                            </td>
+                                            <td>
+                                                <p className="text-xs font-weight-bold mb-0">{val.email}</p>
+                                            </td>
+                                            <td>
+                                                <p className="text-xs font-weight-bold mb-0">{val.name}</p>
+                                            </td>
+                                            <td className="text-center">
+                                                <div
+                                                    className="cursor-pointer"
+                                                    onClick={(e) => handleSubmit(e, val.id, val.status)}
+                                                >
+                                                    {
+                                                        val.status == 0 ?
+                                                            <i className="fa fa-toggle-off text-secondary"></i> :
+                                                            <i className="fa fa-toggle-on text-success"></i>
+                                                    }
+                                                </div>
 
-                                                tabIndex="1"
+                                            </td>
+                                            <td>
+                                                <span
+                                                    className="text-secondary text-xs font-weight-bold">{moment(val.created_at).format("DD MMM YYYY")}</span>
+                                            </td>
+                                            <td>
+                                                <Link
 
-                                                className="mx-3"
-                                                data-bs-toggle="tooltip"
-                                                data-bs-original-title="Edit user"
+                                                    tabIndex="1"
 
-                                                href={route("users.edit", val.id)}
+                                                    className="mx-3"
+                                                    data-bs-toggle="tooltip"
+                                                    data-bs-original-title="Edit user"
 
-                                            >
-                                                <i className="fas fa-user-edit text-secondary"></i>
-                                            </Link>
+                                                    href={route("users.edit", val.id)}
 
-
-                                            <button
-
-                                                onClick={destroy}
-
-                                                id={val.id}
-
-                                                tabIndex="-1"
-
-                                                type="button"
+                                                >
+                                                    <i className="fas fa-user-edit text-secondary"></i>
+                                                </Link>
 
 
-                                            >
+                                                <button
 
-                                                <i className="cursor-pointer fas fa-trash text-secondary"></i>
+                                                    onClick={destroy}
 
-                                            </button>
+                                                    id={val.id}
 
-                                        </td>
-                                    </tr>
+                                                    tabIndex="-1"
+
+                                                    type="button"
+
+
+                                                >
+
+                                                    <i className="cursor-pointer fas fa-trash text-secondary"></i>
+
+                                                </button>
+
+                                            </td>
+                                        </tr>
                                     ))}
+
+                                    {users.data.length === 0 && (
+
+                                        <tr>
+
+                                            <td colSpan="8" align={"center"}>
+
+                                                <p className="text-xs font-weight-bold mb-0">No users found.</p>
+
+                                            </td>
+
+                                        </tr>
+
+                                    )}
+
                                     </tbody>
                                 </table>
+                                <div className="pagination mx-4"> {users.links.map((link, index) => (
+                                    <Link key={index} href={link.url}
+                                          className={`btn bg-gradient-secondary btn-sm mb-0 pagination-link ${link.active ? 'active' : ''}`}
+                                          dangerouslySetInnerHTML={{__html: link.label}}/>))}
+                                </div>
                             </div>
                         </div>
                     </div>
