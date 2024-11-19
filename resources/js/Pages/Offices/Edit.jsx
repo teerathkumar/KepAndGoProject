@@ -16,9 +16,7 @@ export default function Dashboard(props) {
     const { data, setData, put, errors } = useForm({
 
         name: office.name || "",
-
         parent_id: office.parent_id || "0"
-
     });
 
 
